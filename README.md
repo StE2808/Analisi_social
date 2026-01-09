@@ -76,7 +76,69 @@ TWITTER_BEARER_TOKEN=your_bearer_token
 
 ## Utilizzo
 
-### Raccolta dei Trending Topic
+### ⚡ Quick Start con Claude Code (Consigliato)
+
+Questo progetto include comandi slash personalizzati per Claude Code che automatizzano completamente il workflow di generazione dei report **senza richiedere API esterne**.
+
+#### 1. Setup Iniziale
+
+```
+/setup
+```
+
+Inizializza la struttura del progetto creando tutte le directory necessarie.
+
+#### 2. Generazione Report
+
+```
+/report
+```
+
+Quindi incolla i dati dei trending topic (puoi copiarli manualmente da X/Twitter). Claude genererà:
+- Un report HTML professionale con design elegante
+- Analisi del sentiment automatica
+- Insight sociologici sulla viralità
+- Commit e push automatico su GitHub
+
+**Esempio di workflow**:
+```
+Utente: /report
+Claude: "Per favore, incolla i dati dei trending topic..."
+Utente: [incolla i trend del giorno]
+Claude: [genera report, committa, pusha]
+```
+
+#### 3. Archiviazione Automatica
+
+```
+/archive
+```
+
+Sposta automaticamente i report più vecchi di 7 giorni in `reports/archive/`.
+
+#### 4. Indice Report
+
+```
+/index
+```
+
+Genera una pagina HTML navigabile con tutti i report disponibili (perfetto per GitHub Pages).
+
+#### Vantaggi dell'Approccio Claude Code
+
+✅ **Nessuna API Key richiesta**: non serve configurare credenziali X
+✅ **Semplicità**: un comando, zero configurazione
+✅ **Flessibilità**: incolla qualsiasi dato di trend, anche manuale
+✅ **Automazione Git**: commit e push automatici
+✅ **Design professionale**: report HTML pronti per essere pubblicati
+
+---
+
+### 🐍 Utilizzo con Python (Opzionale)
+
+Se preferisci usare script Python con l'API di X:
+
+#### Raccolta dei Trending Topic
 
 ```bash
 python scripts/collect_trends.py
@@ -84,13 +146,13 @@ python scripts/collect_trends.py
 
 Questo comando raccoglierà i trending topic italiani correnti e salverà i dati in `data/raw/`.
 
-### Analisi del Sentiment
+#### Analisi del Sentiment
 
 ```bash
 python scripts/analyze_sentiment.py --input data/raw/trends_YYYYMMDD.json
 ```
 
-### Generazione Report HTML
+#### Generazione Report HTML
 
 ```bash
 python scripts/generate_report.py --date YYYYMMDD
@@ -98,7 +160,7 @@ python scripts/generate_report.py --date YYYYMMDD
 
 Il report sarà salvato in `reports/archive/report_YYYYMMDD.html`.
 
-### Pipeline Completa
+#### Pipeline Completa
 
 Esegui l'intera pipeline con un singolo comando:
 
