@@ -116,3 +116,6 @@ models/
 temp/
 tmp/
 scratch/
+
+# Development files (offline only)
+_dev/
