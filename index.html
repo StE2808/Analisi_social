@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Social - Trending Topics X Italia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nero-profondo: #0a0a0f;
+            --grigio-ardesia: #1a1a24;
+            --grigio-medio: #2d2d3a;
+            --bianco-caldo: #f8f6f2;
+            --rosso-tensione: #c43a31;
+            --blu-profondo: #1a365d;
+            --oro-miele: #d4a574;
+            --verde-oliva: #4a5240;
+            --azzurro-ghiaccio: #7eb8da;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: var(--nero-profondo);
+            color: var(--bianco-caldo);
+            line-height: 1.7;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(196,58,49,0.15) 0%, transparent 50%),
+                        linear-gradient(225deg, rgba(26,54,93,0.2) 0%, transparent 50%),
+                        var(--nero-profondo);
+        }
+
+        .logo {
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--oro-miele);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--bianco-caldo) 0%, var(--oro-miele) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 700px;
+            opacity: 0.8;
+            margin-bottom: 4rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--oro-miele);
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .report-card {
+            background: var(--grigio-ardesia);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .report-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--oro-miele), #b8860b);
+        }
+
+        .report-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(212, 165, 116, 0.2);
+        }
+
+        .report-header {
+            padding: 2rem;
+            border-bottom: 1px solid rgba(248,246,242,0.08);
+        }
+
+        .report-date {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--oro-miele);
+            margin-bottom: 0.5rem;
+        }
+
+        .report-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .report-body {
+            padding: 2rem;
+        }
+
+        .report-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+            margin-bottom: 0.3rem;
+        }
+
+        .meta-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .report-highlights {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-item {
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        .highlight-item::before {
+            content: '▸';
+            color: var(--oro-miele);
+            margin-right: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--oro-miele), #b8860b);
+            color: var(--nero-profondo);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 165, 116, 0.4);
+        }
+
+        .about-section {
+            background: var(--grigio-ardesia);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border-left: 4px solid var(--oro-miele);
+        }
+
+        .about-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--oro-miele);
+        }
+
+        .about-section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            opacity: 0.85;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--azzurro-ghiaccio);
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(248,246,242,0.08);
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--azzurro-ghiaccio);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--oro-miele);
+        }
+
+        .footer-meta {
+            font-size: 0.8rem;
+            opacity: 0.4;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .reports-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <p class="logo">Social Intelligence</p>
+        <h1>Analisi Social</h1>
+        <p class="tagline">
+            Analisi approfondite dei trending topics di X (Twitter) Italia.<br>
+            Categorizzazione, sentiment analysis e insight sociologici.
+        </p>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">Report Disponibili</h2>
+
+        <div class="reports-grid">
+            <!-- Report 9 Gennaio 2026 -->
+            <article class="report-card">
+                <div class="report-header">
+                    <div class="report-date">9 Gennaio 2026</div>
+                    <h3 class="report-title">Trend Italia: Calcio, Geopolitica e Memoria</h3>
+                </div>
+                <div class="report-body">
+                    <div class="report-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Trend analizzati</span>
+                            <span class="meta-value">20</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Categorie</span>
+                            <span class="meta-value">7</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Volume</span>
+                            <span class="meta-value">919K tweet</span>
+                        </div>
+                    </div>
+
+                    <div class="report-highlights">
+                        <div class="highlight-item">Cultura e Spettacolo domina (60%)</div>
+                        <div class="highlight-item">Iran mega-trend cross-category (400K+)</div>
+                        <div class="highlight-item">Massima polarizzazione: Acca Larentia (0.95)</div>
+                        <div class="highlight-item">Importazione "culture wars" USA</div>
+                    </div>
+
+                    <a href="reports/archive/report_20260109.html" class="btn">Leggi Report</a>
+                </div>
+            </article>
+
+            <!-- Placeholder per report futuri -->
+            <article class="report-card" style="opacity: 0.5; pointer-events: none;">
+                <div class="report-header">
+                    <div class="report-date">Prossimamente</div>
+                    <h3 class="report-title">Nuovi Report in Arrivo</h3>
+                </div>
+                <div class="report-body">
+                    <p style="opacity: 0.7; font-size: 0.95rem;">
+                        I prossimi report verranno pubblicati automaticamente quando nuovi dati saranno disponibili.
+                    </p>
+                </div>
+            </article>
+        </div>
+
+        <section class="about-section">
+            <h2>📊 Il Progetto</h2>
+            <p>
+                <strong>Analisi Social</strong> è un progetto di social intelligence che monitora e analizza
+                i trending topics di X (Twitter) Italia con metodologia scientifica.
+            </p>
+            <p>
+                Ogni report categorizza i trend secondo 16 categorie editoriali, analizza il sentiment
+                dell'opinione pubblica e identifica insight sociologici rilevanti.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>🎯 Categorizzazione</h3>
+                    <p>16 categorie del blog: Politica, Geopolitica, Economia, Cultura, Sport, Cronaca, Diritti Umani, Ambiente, Scienza e altro.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>💭 Sentiment Analysis</h3>
+                    <p>Analisi del sentiment per ogni topic e categoria, con indici di polarizzazione e distribuzione emotiva.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>🔍 Cross-Category</h3>
+                    <p>Identificazione di trend che attraversano multiple categorie e creano connessioni tematiche.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>📈 Insight Sociologici</h3>
+                    <p>Analisi di polarizzazione, trend emergenti, event detection e dinamiche del dibattito pubblico.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://github.com/StE2808/Analisi_social" target="_blank">GitHub</a>
+            <a href="https://github.com/StE2808/Analisi_social/blob/main/CLAUDE.md" target="_blank">Metodologia</a>
+            <a href="https://github.com/StE2808/Analisi_social/blob/main/README.md" target="_blank">Documentazione</a>
+        </div>
+        <p class="footer-meta">
+            Progetto open source di analisi social intelligence<br>
+            Powered by Python, Plotly e Claude Code
+        </p>
+    </footer>
+</body>
+</html>

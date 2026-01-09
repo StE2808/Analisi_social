@@ -4,18 +4,21 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-success)
 
+**📊 [Visualizza i Report Online](https://ste2808.github.io/Analisi_social/)**
+
 ## Panoramica
 
-**Analisi_social** è un progetto di social media analytics focalizzato sull'analisi dei trending topic di X (Twitter) in Italia. Il sistema genera report HTML dettagliati che includono analisi del sentiment, insight sociologici e visualizzazioni interattive per comprendere le dinamiche delle conversazioni online nel contesto italiano.
+**Analisi_social** è un progetto di social media analytics focalizzato sull'analisi dei trending topic di X (Twitter) in Italia. Il sistema categorizza i trend secondo 16 categorie editoriali, genera report HTML dettagliati con analisi del sentiment, insight sociologici e visualizzazioni interattive per comprendere le dinamiche delle conversazioni online nel contesto italiano.
 
 ## Caratteristiche Principali
 
+- **Categorizzazione Automatica**: Classificazione in 16 categorie editoriali del blog (Politica, Geopolitica, Economia, Cultura, Sport, Cronaca, Diritti Umani, Ambiente, Scienza, ecc.)
 - **Raccolta Dati Automatizzata**: Integrazione con X API per il recupero dei trending topic italiani
-- **Sentiment Analysis**: Analisi approfondita del sentiment delle conversazioni (positivo, negativo, neutro)
-- **Insight Sociologici**: Identificazione di pattern, temi emergenti e dinamiche sociali
-- **Report HTML Interattivi**: Visualizzazioni responsive e grafici interattivi
-- **Analisi Temporale**: Tracking dell'evoluzione dei trend nel tempo
-- **Network Analysis**: Identificazione degli influencer e delle community
+- **Sentiment Analysis Avanzata**: Analisi del sentiment per topic e categoria con indici di polarizzazione
+- **Cross-Category Analysis**: Identificazione di trend che attraversano multiple categorie
+- **Insight Sociologici**: Pattern, trend emergenti, polarizzazione, event detection
+- **Report HTML Interattivi**: Design editoriale premium, visualizzazioni responsive con Plotly.js
+- **Pipeline End-to-End**: Sistema completo dalla raccolta dati alla generazione report
 
 ## Struttura del Progetto
 
@@ -183,14 +186,31 @@ I report generati includono:
 - Documentare funzioni e classi
 - Gestire errori ed eccezioni appropriatamente
 
+## Visualizza i Report Online
+
+I report sono pubblicati automaticamente su GitHub Pages:
+
+**🌐 https://ste2808.github.io/Analisi_social/**
+
+Ogni report include:
+- Categorizzazione completa per le 16 categorie del blog
+- Sentiment analysis con polarizzazione
+- Insight sociologici approfonditi
+- Visualizzazioni interattive
+- Design editoriale premium dark mode
+
 ## Roadmap
 
-- [ ] Implementazione pipeline base di raccolta dati
-- [ ] Sviluppo modulo sentiment analysis
-- [ ] Creazione template HTML report
-- [ ] Integrazione analisi network
+- [x] Implementazione pipeline base di raccolta dati
+- [x] Sistema di categorizzazione (16 categorie blog)
+- [x] Sviluppo modulo sentiment analysis
+- [x] Creazione template HTML report (design premium)
+- [x] Cross-category analysis
+- [x] GitHub Pages per pubblicazione report
+- [ ] Integrazione analisi network avanzata
 - [ ] Dashboard interattiva real-time
 - [ ] API REST per accesso ai dati
+- [ ] Automazione con GitHub Actions
 - [ ] Notifiche automatiche per trend rilevanti
 - [ ] ML models per previsione trend emergenti
 - [ ] Supporto multi-lingua
@@ -229,10 +249,20 @@ Per domande, suggerimenti o collaborazioni:
 
 ## Changelog
 
+### [1.1.0] - 2026-01-09
+- ✅ Pipeline completa end-to-end implementata
+- ✅ Sistema di categorizzazione (16 categorie blog)
+- ✅ Sentiment analysis con polarizzazione
+- ✅ Cross-category analysis
+- ✅ Template HTML premium (dark mode, Playfair Display)
+- ✅ Report interattivi con Plotly.js
+- ✅ GitHub Pages per pubblicazione online
+- ✅ Primo report completo pubblicato (9 Gennaio 2026)
+
 ### [1.0.0] - 2026-01-09
 - Inizializzazione progetto
 - Struttura base del repository
-- Documentazione iniziale
+- Documentazione iniziale (CLAUDE.md)
 
 ---
 
