@@ -43,6 +43,9 @@
         .card-intrattenimento::before { background: linear-gradient(90deg, var(--oro-miele), #b8860b); }
         .card-geopolitica::before { background: linear-gradient(90deg, var(--blu-profondo), var(--azzurro-ghiaccio)); }
         .card-sentiment::before { background: linear-gradient(90deg, #6b4c8a, #9b6ba3); }
+        .card-agenzie::before { background: linear-gradient(90deg, #ff8c42, #ff6b35); }
+        .card-correlazioni::before { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
+        .card-economia::before { background: linear-gradient(90deg, var(--oro-miele), #b8860b); }
 
         .card-header { padding: 2rem 2.5rem; border-bottom: 1px solid rgba(248,246,242,0.08); display: flex; justify-content: space-between; align-items: center; }
         .card-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; }
@@ -65,6 +68,10 @@
         .sentiment-deluso { background: rgba(139,90,43,0.2); color: #c4956a; }
         .sentiment-ironico { background: rgba(107,76,138,0.2); color: #b088c9; }
         .sentiment-nostalgico { background: rgba(184,134,11,0.2); color: #e6c352; }
+        .sentiment-strategico { background: rgba(26,54,93,0.3); color: var(--azzurro-ghiaccio); }
+        .sentiment-determinato { background: rgba(196,58,49,0.2); color: #e85a52; }
+        .sentiment-pragmatico { background: rgba(74,82,64,0.3); color: #8db580; }
+        .sentiment-cauto { background: rgba(139,90,43,0.2); color: #c4956a); }
 
         .relevance-bar { width: 100px; height: 6px; background: rgba(248,246,242,0.1); border-radius: 3px; overflow: hidden; margin-top: 0.5rem; }
         .relevance-fill { height: 100%; border-radius: 3px; }
@@ -91,6 +98,18 @@
         .report-footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(248,246,242,0.08); margin-top: 4rem; }
         .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; opacity: 0.6; margin-bottom: 1rem; }
         .footer-meta { font-size: 0.8rem; opacity: 0.4; }
+
+        /* Nuove sezioni per modalità report */
+        .fonte-badge { display: inline-block; padding: 0.2rem 0.6rem; background: rgba(255,140,66,0.2); color: #ff8c42; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-right: 0.5rem; }
+        .correlazione-tipo { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .tipo-causa { background: rgba(231,76,60,0.2); color: #e74c3c; }
+        .tipo-effetto { background: rgba(52,152,219,0.2); color: #3498db; }
+        .tipo-amplificazione { background: rgba(155,89,182,0.2); color: #9b59b6; }
+
+        @media (max-width: 768px) {
+            .trend-table { font-size: 0.9rem; }
+            .trend-table th, .trend-table td { padding: 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -159,6 +178,102 @@
         {{INSIGHT_BLOCKS}}
     </div>
 </section>
+
+<!-- SEZIONE NOTIZIE AGENZIE (Modalità 2 o 3) -->
+<!-- Uncomment e popola se input contiene === NOTIZIE AGENZIE === -->
+<!--
+<div class="section-header">
+    <span class="section-number">{{NUMERO}}</span>
+    <h2 class="section-title">Notizie Agenzie Stampa</h2>
+    <p class="section-subtitle">Breaking news dalle principali agenzie internazionali</p>
+</div>
+
+<div class="category-card card-agenzie">
+    <div class="card-header">
+        <span class="card-title">📰 Agenzie Stampa</span>
+        <span class="card-badge">{{NUM_NOTIZIE}} notizie</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Titolo</th>
+                    <th>Fonte</th>
+                    <th>Sintesi</th>
+                    <th>Categoria</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">{{TITOLO_NOTIZIA}}</div>
+                        <div class="trend-hashtag">{{TIMESTAMP}}</div>
+                    </td>
+                    <td>
+                        <span class="fonte-badge">{{FONTE}}</span>
+                    </td>
+                    <td class="trend-content">{{SINTESI_NOTIZIA}}</td>
+                    <td>{{CATEGORIA}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+-->
+
+<!-- SEZIONE CORRELAZIONI (Solo Modalità 3) -->
+<!-- Uncomment SOLO se input contiene ENTRAMBI === TREND X === e === NOTIZIE AGENZIE === -->
+<!--
+<div class="section-header">
+    <span class="section-number">{{NUMERO}}</span>
+    <h2 class="section-title">Correlazioni Social-News</h2>
+    <p class="section-subtitle">Collegamenti tra trend virali X e notizie agenzie stampa</p>
+</div>
+
+<div class="category-card card-correlazioni">
+    <div class="card-header">
+        <span class="card-title">🔗 Social ↔ News</span>
+        <span class="card-badge">{{NUM_CORRELAZIONI}} correlazioni identificate</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Trend X</th>
+                    <th>Notizia Correlata</th>
+                    <th>Tipo</th>
+                    <th>Spiegazione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">{{NOME_TREND}}</div>
+                        <div class="trend-hashtag">{{VOLUME}} tweet</div>
+                    </td>
+                    <td class="trend-content">
+                        <span class="fonte-badge">{{FONTE}}</span>
+                        {{TITOLO_NOTIZIA}}
+                    </td>
+                    <td>
+                        <span class="correlazione-tipo tipo-{{TIPO_CLASSE}}">{{TIPO}}</span>
+                    </td>
+                    <td class="trend-content">{{SPIEGAZIONE}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.2); border-radius: 12px;">
+            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 1rem; opacity: 0.8;">Legenda Tipi Correlazione</h4>
+            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                <div><span class="correlazione-tipo tipo-causa">CAUSA</span> News genera trend X</div>
+                <div><span class="correlazione-tipo tipo-effetto">EFFETTO</span> Trend X influenza coverage news</div>
+                <div><span class="correlazione-tipo tipo-amplificazione">AMPLIFICAZIONE</span> News e trend si rafforzano</div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
 
 </main>
 
