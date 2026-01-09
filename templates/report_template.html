@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Trend X Italia | {{DATA}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nero-profondo: #0a0a0f;
+            --grigio-ardesia: #1a1a24;
+            --grigio-medio: #2d2d3a;
+            --bianco-caldo: #f8f6f2;
+            --rosso-tensione: #c43a31;
+            --blu-profondo: #1a365d;
+            --oro-miele: #d4a574;
+            --verde-oliva: #4a5240;
+            --azzurro-ghiaccio: #7eb8da;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans Pro', sans-serif; background: var(--nero-profondo); color: var(--bianco-caldo); line-height: 1.7; }
+
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(196,58,49,0.15) 0%, transparent 50%), linear-gradient(225deg, rgba(26,54,93,0.2) 0%, transparent 50%), var(--nero-profondo); }
+        .data-label { font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--oro-miele); margin-bottom: 1rem; font-weight: 600; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--bianco-caldo) 0%, var(--oro-miele) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.3rem; font-weight: 300; max-width: 600px; opacity: 0.8; margin-bottom: 3rem; }
+        .mood-indicator { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+        .mood-pill { padding: 0.6rem 1.5rem; border: 1px solid rgba(248,246,242,0.2); border-radius: 50px; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
+        .mood-pill.teso { border-color: var(--rosso-tensione); color: var(--rosso-tensione); }
+        .mood-pill.diviso { border-color: var(--azzurro-ghiaccio); color: var(--azzurro-ghiaccio); }
+        .mood-pill.resiliente { border-color: var(--verde-oliva); color: var(--verde-oliva); }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .section-header { padding: 6rem 0 3rem; position: relative; }
+        .section-number { font-family: 'Playfair Display', serif; font-size: 8rem; font-weight: 900; position: absolute; top: 2rem; left: -1rem; opacity: 0.05; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .section-subtitle { font-size: 1rem; opacity: 0.6; font-weight: 300; }
+
+        .category-card { background: var(--grigio-ardesia); border-radius: 16px; margin-bottom: 4rem; overflow: hidden; position: relative; }
+        .category-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+        .card-politica::before { background: linear-gradient(90deg, var(--rosso-tensione), #8b1a1a); }
+        .card-sport::before { background: linear-gradient(90deg, #1e6f5c, var(--verde-oliva)); }
+        .card-intrattenimento::before { background: linear-gradient(90deg, var(--oro-miele), #b8860b); }
+        .card-geopolitica::before { background: linear-gradient(90deg, var(--blu-profondo), var(--azzurro-ghiaccio)); }
+        .card-sentiment::before { background: linear-gradient(90deg, #6b4c8a, #9b6ba3); }
+
+        .card-header { padding: 2rem 2.5rem; border-bottom: 1px solid rgba(248,246,242,0.08); display: flex; justify-content: space-between; align-items: center; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; }
+        .card-badge { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 20px; background: rgba(248,246,242,0.1); }
+
+        .trend-table { width: 100%; border-collapse: collapse; }
+        .trend-table thead { background: rgba(0,0,0,0.3); }
+        .trend-table th { padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro-miele); }
+        .trend-table td { padding: 1.5rem; border-bottom: 1px solid rgba(248,246,242,0.05); vertical-align: top; }
+        .trend-table tbody tr:hover { background: rgba(248,246,242,0.03); }
+        .trend-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .trend-hashtag { font-size: 0.85rem; opacity: 0.5; }
+        .trend-content { font-size: 0.95rem; line-height: 1.6; opacity: 0.85; }
+
+        .sentiment-tag { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin: 0.2rem; }
+        .sentiment-indignato { background: rgba(196,58,49,0.2); color: #e85a52; }
+        .sentiment-critico { background: rgba(212,165,116,0.2); color: var(--oro-miele); }
+        .sentiment-preoccupato { background: rgba(126,184,218,0.2); color: var(--azzurro-ghiaccio); }
+        .sentiment-entusiasta { background: rgba(74,82,64,0.3); color: #8db580; }
+        .sentiment-deluso { background: rgba(139,90,43,0.2); color: #c4956a; }
+        .sentiment-ironico { background: rgba(107,76,138,0.2); color: #b088c9; }
+        .sentiment-nostalgico { background: rgba(184,134,11,0.2); color: #e6c352; }
+
+        .relevance-bar { width: 100px; height: 6px; background: rgba(248,246,242,0.1); border-radius: 3px; overflow: hidden; margin-top: 0.5rem; }
+        .relevance-fill { height: 100%; border-radius: 3px; }
+        .relevance-altissima .relevance-fill { width: 100%; background: var(--rosso-tensione); }
+        .relevance-alta .relevance-fill { width: 80%; background: var(--oro-miele); }
+        .relevance-media-alta .relevance-fill { width: 65%; background: var(--azzurro-ghiaccio); }
+        .relevance-media .relevance-fill { width: 50%; background: var(--verde-oliva); }
+        .relevance-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+
+        .sentiment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 2rem 2.5rem; }
+        .sentiment-item { background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border-left: 3px solid; }
+        .sentiment-item.preoccupazione { border-left-color: var(--rosso-tensione); }
+        .sentiment-item.fuga { border-left-color: var(--verde-oliva); }
+        .sentiment-item.incertezza { border-left-color: var(--blu-profondo); }
+        .sentiment-item h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.8rem; }
+        .sentiment-item p { font-size: 0.9rem; opacity: 0.8; line-height: 1.6; }
+
+        .insight-section { background: linear-gradient(135deg, var(--grigio-ardesia), var(--grigio-medio)); border-radius: 16px; padding: 3rem; margin: 4rem 0; position: relative; }
+        .insight-title { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem; color: var(--oro-miele); }
+        .insight-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .insight-block h4 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; padding-left: 1rem; border-left: 2px solid var(--oro-miele); }
+        .insight-block p { font-size: 0.95rem; line-height: 1.8; opacity: 0.85; }
+
+        .report-footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(248,246,242,0.08); margin-top: 4rem; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; opacity: 0.6; margin-bottom: 1rem; }
+        .footer-meta { font-size: 0.8rem; opacity: 0.4; }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <p class="data-label">Social Intelligence Report</p>
+    <h1>{{TITOLO}}</h1>
+    <p class="hero-subtitle">{{SOTTOTITOLO}}</p>
+    <div class="mood-indicator">
+        {{MOOD_PILLS}}
+    </div>
+</section>
+
+<main class="container">
+
+<!-- SEZIONE TEMPLATE - Ripetere per ogni categoria -->
+<div class="section-header">
+    <span class="section-number">{{NUMERO}}</span>
+    <h2 class="section-title">{{NOME_CATEGORIA}}</h2>
+    <p class="section-subtitle">{{DESCRIZIONE_CATEGORIA}}</p>
+</div>
+
+<div class="category-card card-{{CLASSE_CATEGORIA}}">
+    <div class="card-header">
+        <span class="card-title">{{TITOLO_CARD}}</span>
+        <span class="card-badge">{{BADGE}}</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Trend</th>
+                    <th>Sintesi</th>
+                    <th>Sentiment</th>
+                    <th>Rilevanza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- RIPETERE PER OGNI TREND -->
+                <tr>
+                    <td>
+                        <div class="trend-name">{{NOME_TREND}}</div>
+                        <div class="trend-hashtag">{{HASHTAG}}</div>
+                    </td>
+                    <td class="trend-content">{{SINTESI}}</td>
+                    <td>
+                        {{SENTIMENT_TAGS}}
+                    </td>
+                    <td>
+                        <span class="relevance-label">{{RILEVANZA_LABEL}}</span>
+                        <div class="relevance-bar relevance-{{RILEVANZA_CLASSE}}">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- INSIGHT -->
+<section class="insight-section">
+    <h3 class="insight-title">💡 Insight del Giorno</h3>
+    <div class="insight-content">
+        {{INSIGHT_BLOCKS}}
+    </div>
+</section>
+
+</main>
+
+<footer class="report-footer">
+    <div class="footer-logo">Social Intelligence Report</div>
+    <p class="footer-meta">Analisi generata il {{DATA}} — Dati aggregati da X (Twitter) Italia</p>
+</footer>
+
+</body>
+</html>
