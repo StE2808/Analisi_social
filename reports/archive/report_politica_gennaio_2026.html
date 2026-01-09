@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Politica Italia | Gennaio 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nero-profondo: #0a0a0f;
+            --grigio-ardesia: #1a1a24;
+            --grigio-medio: #2d2d3a;
+            --bianco-caldo: #f8f6f2;
+            --rosso-tensione: #c43a31;
+            --blu-profondo: #1a365d;
+            --oro-miele: #d4a574;
+            --verde-oliva: #4a5240;
+            --azzurro-ghiaccio: #7eb8da;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans Pro', sans-serif; background: var(--nero-profondo); color: var(--bianco-caldo); line-height: 1.7; }
+
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(196,58,49,0.15) 0%, transparent 50%), linear-gradient(225deg, rgba(26,54,93,0.2) 0%, transparent 50%), var(--nero-profondo); }
+        .data-label { font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--oro-miele); margin-bottom: 1rem; font-weight: 600; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--bianco-caldo) 0%, var(--oro-miele) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.3rem; font-weight: 300; max-width: 700px; opacity: 0.8; margin-bottom: 3rem; line-height: 1.6; }
+        .mood-indicator { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+        .mood-pill { padding: 0.6rem 1.5rem; border: 1px solid rgba(248,246,242,0.2); border-radius: 50px; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
+        .mood-pill.riforme { border-color: var(--rosso-tensione); color: var(--rosso-tensione); }
+        .mood-pill.diplomatico { border-color: var(--azzurro-ghiaccio); color: var(--azzurro-ghiaccio); }
+        .mood-pill.economico { border-color: var(--oro-miele); color: var(--oro-miele); }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .section-header { padding: 6rem 0 3rem; position: relative; }
+        .section-number { font-family: 'Playfair Display', serif; font-size: 8rem; font-weight: 900; position: absolute; top: 2rem; left: -1rem; opacity: 0.05; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .section-subtitle { font-size: 1rem; opacity: 0.6; font-weight: 300; }
+
+        .category-card { background: var(--grigio-ardesia); border-radius: 16px; margin-bottom: 4rem; overflow: hidden; position: relative; }
+        .category-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+        .card-politica::before { background: linear-gradient(90deg, var(--rosso-tensione), #8b1a1a); }
+        .card-geopolitica::before { background: linear-gradient(90deg, var(--blu-profondo), var(--azzurro-ghiaccio)); }
+        .card-economia::before { background: linear-gradient(90deg, var(--oro-miele), #b8860b); }
+
+        .card-header { padding: 2rem 2.5rem; border-bottom: 1px solid rgba(248,246,242,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; }
+        .card-badge { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 20px; background: rgba(248,246,242,0.1); }
+
+        .trend-table { width: 100%; border-collapse: collapse; }
+        .trend-table thead { background: rgba(0,0,0,0.3); }
+        .trend-table th { padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro-miele); }
+        .trend-table td { padding: 1.5rem; border-bottom: 1px solid rgba(248,246,242,0.05); vertical-align: top; }
+        .trend-table tbody tr:hover { background: rgba(248,246,242,0.03); }
+        .trend-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .trend-hashtag { font-size: 0.85rem; opacity: 0.5; }
+        .trend-content { font-size: 0.95rem; line-height: 1.6; opacity: 0.85; }
+
+        .sentiment-tag { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin: 0.2rem; }
+        .sentiment-strategico { background: rgba(26,54,93,0.3); color: var(--azzurro-ghiaccio); }
+        .sentiment-critico { background: rgba(212,165,116,0.2); color: var(--oro-miele); }
+        .sentiment-preoccupato { background: rgba(126,184,218,0.2); color: var(--azzurro-ghiaccio); }
+        .sentiment-determinato { background: rgba(196,58,49,0.2); color: #e85a52; }
+        .sentiment-pragmatico { background: rgba(74,82,64,0.3); color: #8db580; }
+        .sentiment-cauto { background: rgba(139,90,43,0.2); color: #c4956a; }
+
+        .relevance-bar { width: 100px; height: 6px; background: rgba(248,246,242,0.1); border-radius: 3px; overflow: hidden; margin-top: 0.5rem; }
+        .relevance-fill { height: 100%; border-radius: 3px; }
+        .relevance-altissima .relevance-fill { width: 100%; background: var(--rosso-tensione); }
+        .relevance-alta .relevance-fill { width: 80%; background: var(--oro-miele); }
+        .relevance-media-alta .relevance-fill { width: 65%; background: var(--azzurro-ghiaccio); }
+        .relevance-media .relevance-fill { width: 50%; background: var(--verde-oliva); }
+        .relevance-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+
+        .insight-section { background: linear-gradient(135deg, var(--grigio-ardesia), var(--grigio-medio)); border-radius: 16px; padding: 3rem; margin: 4rem 0; position: relative; }
+        .insight-title { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem; color: var(--oro-miele); }
+        .insight-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .insight-block h4 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; padding-left: 1rem; border-left: 2px solid var(--oro-miele); }
+        .insight-block p { font-size: 0.95rem; line-height: 1.8; opacity: 0.85; }
+
+        .report-footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(248,246,242,0.08); margin-top: 4rem; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; opacity: 0.6; margin-bottom: 1rem; }
+        .footer-meta { font-size: 0.8rem; opacity: 0.4; line-height: 1.6; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .section-number { font-size: 4rem; }
+            .trend-table { font-size: 0.9rem; }
+            .trend-table th, .trend-table td { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <p class="data-label">Report Politico Editoriale</p>
+    <h1>Agenda Italia<br>Gennaio 2026</h1>
+    <p class="hero-subtitle">Le principali notizie dalla politica italiana: riforme, diplomazia e manovre economiche che tracciano la rotta del Paese</p>
+    <div class="mood-indicator">
+        <span class="mood-pill riforme">Riforme</span>
+        <span class="mood-pill diplomatico">Diplomatico</span>
+        <span class="mood-pill economico">Economico</span>
+    </div>
+</section>
+
+<main class="container">
+
+<!-- POLITICA INTERNA -->
+<div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Politica Interna</h2>
+    <p class="section-subtitle">Governo, Parlamento e riforme istituzionali</p>
+</div>
+
+<div class="category-card card-politica">
+    <div class="card-header">
+        <span class="card-title">🏛️ Governo e Istituzioni</span>
+        <span class="card-badge">4 notizie principali</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Tema</th>
+                    <th>Sintesi</th>
+                    <th>Tono</th>
+                    <th>Rilevanza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">Conferenza Stampa Meloni</div>
+                        <div class="trend-hashtag">9 gennaio 2026</div>
+                    </td>
+                    <td class="trend-content">La premier traccia l'agenda 2026: sicurezza e crescita economica al centro. Conferma referendum giustizia 22-23 marzo, ribadisce sostegno Ucraina, prende distanza da operazione USA in Venezuela.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-determinato">Determinato</span>
+                        <span class="sentiment-tag sentiment-strategico">Strategico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Altissima</span>
+                        <div class="relevance-bar relevance-altissima">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Riforma Giustizia</div>
+                        <div class="trend-hashtag">Referendum marzo 2026</div>
+                    </td>
+                    <td class="trend-content">Referendum confermativo sulla separazione delle carriere tra magistrati giudicanti e requirenti previsto per 22-23 marzo. Tappa cruciale del programma riforme del governo Meloni.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-determinato">Determinato</span>
+                        <span class="sentiment-tag sentiment-critico">Divisivo</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Altissima</span>
+                        <div class="relevance-bar relevance-altissima">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Legge di Bilancio 2026</div>
+                        <div class="trend-hashtag">Approvata 30 dicembre</div>
+                    </td>
+                    <td class="trend-content">Manovra da 22,2 miliardi: tassazione piatta 5% per aumenti contrattuali fino a 32K€, silenzio-assenso TFR fondi pensione, rifinanziamento Transizione 4.0 e ZES Mezzogiorno. Priorità famiglia e natalità.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-pragmatico">Pragmatico</span>
+                        <span class="sentiment-tag sentiment-strategico">Economico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Piano Casa</div>
+                        <div class="trend-hashtag">Annuncio Meloni</div>
+                    </td>
+                    <td class="trend-content">Centomila nuovi appartamenti a prezzi calmierati in 10 anni, progetto con Salvini, Foti, Confindustria e CEI. Dettagli tecnici e piano industriale in arrivo. Nessun impegno vincolante senza tutele occupazionali e ambientali.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-pragmatico">Pragmatico</span>
+                        <span class="sentiment-tag sentiment-cauto">Cauto</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- POLITICA ESTERA -->
+<div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Politica Estera & Geopolitica</h2>
+    <p class="section-subtitle">Crisi internazionali e diplomazia italiana</p>
+</div>
+
+<div class="category-card card-geopolitica">
+    <div class="card-header">
+        <span class="card-title">🌍 Diplomazia e Relazioni Internazionali</span>
+        <span class="card-badge">2 dossier critici</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Tema</th>
+                    <th>Sintesi</th>
+                    <th>Tono</th>
+                    <th>Rilevanza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">Decreto Ucraina 2026</div>
+                        <div class="trend-hashtag">Approvato 29 dicembre</div>
+                    </td>
+                    <td class="trend-content">Proroga aiuti all'Ucraina fino al 31/12/2026, compromesso Meloni-Salvini: aiuti militari confermati ma priorità a logistici, sanitari, civili, protezione aerea e cyber. Tredicesimo pacchetto dall'inizio conflitto. Comunicazioni Crosetto in Aula il 15 gennaio.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-strategico">Strategico</span>
+                        <span class="sentiment-tag sentiment-critico">Mediato</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Altissima</span>
+                        <div class="relevance-bar relevance-altissima">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Venezuela: Liberazioni</div>
+                        <div class="trend-hashtag">Attesa per Trentini</div>
+                    </td>
+                    <td class="trend-content">Liberati giornalista Biagio Pilieri e imprenditore Luigi Gasperin. Alberto Trentini ancora detenuto dopo 400+ giorni senza accusa. Rimangono 26 italiani/italo-venezuelani in carcere. Meloni ringrazia governo Rodríguez, colloquio con leader opposizione Machado (Nobel pace).</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
+                        <span class="sentiment-tag sentiment-pragmatico">Diplomatico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ECONOMIA -->
+<div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Economia e Finanza</h2>
+    <p class="section-subtitle">Accordi commerciali e manovre economiche</p>
+</div>
+
+<div class="category-card card-economia">
+    <div class="card-header">
+        <span class="card-title">💰 Commercio e Sviluppo Economico</span>
+        <span class="card-badge">1 svolta storica</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Tema</th>
+                    <th>Sintesi</th>
+                    <th>Tono</th>
+                    <th>Rilevanza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">Accordo UE-Mercosur</div>
+                        <div class="trend-hashtag">Approvato 9 gennaio</div>
+                    </td>
+                    <td class="trend-content">Il più grande accordo di libero scambio mai negoziato, dopo 25 anni trattative. Italia cambia posizione: da contraria ad approvazione grazie a garanzie agricoltura (fondo 10 mld€, salvaguardie prodotti sensibili, controlli fitosanitari). Elimina dazi 91% scambi, risparmio 4 mld€/anno tariffe. Benefici per macchinari, automotive, chimico-farmaceutico.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-strategico">Strategico</span>
+                        <span class="sentiment-tag sentiment-pragmatico">Pragmatico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Altissima</span>
+                        <div class="relevance-bar relevance-altissima">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- INSIGHT -->
+<section class="insight-section">
+    <h3 class="insight-title">💡 Insight Chiave</h3>
+    <div class="insight-content">
+        <div class="insight-block">
+            <h4>Strategia Dual-Track</h4>
+            <p>Il governo Meloni dimostra capacità di gestione simultanea di dossier interni (riforme giustizia, piano casa) e internazionali (Ucraina, Venezuela, Mercosur). L'agenda 2026 si concentra su sicurezza e crescita, con equilibrio tra impegni NATO/UE e pragmatismo economico.</p>
+        </div>
+        <div class="insight-block">
+            <h4>Compromessi di Maggioranza</h4>
+            <p>Il decreto Ucraina evidenzia la necessità di mediazione continua tra Fratelli d'Italia (linea atlantista ferma) e Lega (maggior cautela su aiuti militari). La sintesi politica privilegia aiuti civili/sanitari pur mantenendo componente militare, dimostrando flessibilità tattica su priorità strategiche condivise.</p>
+        </div>
+        <div class="insight-block">
+            <h4>Diplomazia Attiva</h4>
+            <p>Sul Venezuela, Meloni adotta approccio bilanciato: dialogo con governo ad interim per liberazioni (risultati parziali: Pilieri, Gasperin) mentre mantiene canali con opposizione democratica (Machado). Scelta che riflette realismo diplomatico senza abbandonare valori democratici.</p>
+        </div>
+        <div class="insight-block">
+            <h4>Svolta Mercosur</h4>
+            <p>Il cambio di posizione italiana sull'accordo UE-Mercosur (da contraria ad approvazione) segna pragmatismo economico: salvaguardie agricoltura ottenute permettono di cogliere opportunità export per manifattura. Evidenzia capacità negoziale in sede UE e priorità economiche settoriali.</p>
+        </div>
+        <div class="insight-block">
+            <h4>Riforme Come Priorità</h4>
+            <p>Il referendum sulla giustizia (22-23 marzo) rappresenta banco di prova cruciale per la maggioranza. La separazione carriere magistrati è riforma identitaria per il centrodestra, con impatti sistemici sulla giustizia italiana. L'esito influenzerà credibilità e momentum riformista del governo.</p>
+        </div>
+        <div class="insight-block">
+            <h4>Focus Sociale</h4>
+            <p>Legge di Bilancio e Piano Casa segnalano attenzione a ceto medio e famiglie: detassazione aumenti contrattuali, TFR ai fondi pensione, centomila alloggi calmierati in 10 anni. Strategia di consenso su temi materiali (potere d'acquisto, casa) per compensare possibili tensioni su riforme.</p>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="report-footer">
+    <div class="footer-logo">Analisi Social - Report Politico</div>
+    <p class="footer-meta">
+        Report editoriale generato il 9 Gennaio 2026<br>
+        Fonti: ANSA, AGI, Adnkronos, Corriere della Sera, Sky TG24, Il Fatto Quotidiano<br>
+        <a href="https://github.com/StE2808/Analisi_social" style="color: var(--oro-miele); text-decoration: none;">Progetto Analisi Social</a>
+    </p>
+</footer>
+
+</body>
+</html>
