@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Trend X Italia | 10 Gennaio 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nero-profondo: #0a0a0f;
+            --grigio-ardesia: #1a1a24;
+            --grigio-medio: #2d2d3a;
+            --bianco-caldo: #f8f6f2;
+            --rosso-tensione: #c43a31;
+            --blu-profondo: #1a365d;
+            --oro-miele: #d4a574;
+            --verde-oliva: #4a5240;
+            --azzurro-ghiaccio: #7eb8da;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans Pro', sans-serif; background: var(--nero-profondo); color: var(--bianco-caldo); line-height: 1.7; }
+
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(196,58,49,0.15) 0%, transparent 50%), linear-gradient(225deg, rgba(26,54,93,0.2) 0%, transparent 50%), var(--nero-profondo); }
+        .data-label { font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--oro-miele); margin-bottom: 1rem; font-weight: 600; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--bianco-caldo) 0%, var(--oro-miele) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.3rem; font-weight: 300; max-width: 600px; opacity: 0.8; margin-bottom: 3rem; }
+        .mood-indicator { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+        .mood-pill { padding: 0.6rem 1.5rem; border: 1px solid rgba(248,246,242,0.2); border-radius: 50px; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
+        .mood-pill.teso { border-color: var(--rosso-tensione); color: var(--rosso-tensione); }
+        .mood-pill.diviso { border-color: var(--azzurro-ghiaccio); color: var(--azzurro-ghiaccio); }
+        .mood-pill.resiliente { border-color: var(--verde-oliva); color: var(--verde-oliva); }
+        .mood-pill.complesso { border-color: var(--oro-miele); color: var(--oro-miele); }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .section-header { padding: 6rem 0 3rem; position: relative; }
+        .section-number { font-family: 'Playfair Display', serif; font-size: 8rem; font-weight: 900; position: absolute; top: 2rem; left: -1rem; opacity: 0.05; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .section-subtitle { font-size: 1rem; opacity: 0.6; font-weight: 300; }
+
+        .category-card { background: var(--grigio-ardesia); border-radius: 16px; margin-bottom: 4rem; overflow: hidden; position: relative; }
+        .category-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+        .card-politica::before { background: linear-gradient(90deg, var(--rosso-tensione), #8b1a1a); }
+        .card-cronaca::before { background: linear-gradient(90deg, #1e6f5c, var(--verde-oliva)); }
+        .card-intrattenimento::before { background: linear-gradient(90deg, var(--oro-miele), #b8860b); }
+        .card-geopolitica::before { background: linear-gradient(90deg, var(--blu-profondo), var(--azzurro-ghiaccio)); }
+        .card-economia::before { background: linear-gradient(90deg, var(--oro-miele), #b8860b); }
+        .card-sentiment::before { background: linear-gradient(90deg, #6b4c8a, #9b6ba3); }
+
+        .card-header { padding: 2rem 2.5rem; border-bottom: 1px solid rgba(248,246,242,0.08); display: flex; justify-content: space-between; align-items: center; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; }
+        .card-badge { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 20px; background: rgba(248,246,242,0.1); }
+
+        .trend-table { width: 100%; border-collapse: collapse; }
+        .trend-table thead { background: rgba(0,0,0,0.3); }
+        .trend-table th { padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro-miele); }
+        .trend-table td { padding: 1.5rem; border-bottom: 1px solid rgba(248,246,242,0.05); vertical-align: top; }
+        .trend-table tbody tr:hover { background: rgba(248,246,242,0.03); }
+        .trend-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .trend-hashtag { font-size: 0.85rem; opacity: 0.5; }
+        .trend-content { font-size: 0.95rem; line-height: 1.6; opacity: 0.85; }
+
+        .sentiment-tag { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin: 0.2rem; }
+        .sentiment-indignato { background: rgba(196,58,49,0.2); color: #e85a52; }
+        .sentiment-critico { background: rgba(212,165,116,0.2); color: var(--oro-miele); }
+        .sentiment-preoccupato { background: rgba(126,184,218,0.2); color: var(--azzurro-ghiaccio); }
+        .sentiment-entusiasta { background: rgba(74,82,64,0.3); color: #8db580; }
+        .sentiment-deluso { background: rgba(139,90,43,0.2); color: #c4956a); }
+        .sentiment-ironico { background: rgba(107,76,138,0.2); color: #b088c9; }
+        .sentiment-strategico { background: rgba(26,54,93,0.3); color: var(--azzurro-ghiaccio); }
+        .sentiment-determinato { background: rgba(196,58,49,0.2); color: #e85a52; }
+        .sentiment-pragmatico { background: rgba(74,82,64,0.3); color: #8db580; }
+
+        .relevance-bar { width: 100px; height: 6px; background: rgba(248,246,242,0.1); border-radius: 3px; overflow: hidden; margin-top: 0.5rem; }
+        .relevance-fill { height: 100%; border-radius: 3px; }
+        .relevance-altissima .relevance-fill { width: 100%; background: var(--rosso-tensione); }
+        .relevance-alta .relevance-fill { width: 80%; background: var(--oro-miele); }
+        .relevance-media-alta .relevance-fill { width: 65%; background: var(--azzurro-ghiaccio); }
+        .relevance-media .relevance-fill { width: 50%; background: var(--verde-oliva); }
+        .relevance-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+
+        .insight-section { background: linear-gradient(135deg, var(--grigio-ardesia), var(--grigio-medio)); border-radius: 16px; padding: 3rem; margin: 4rem 0; position: relative; }
+        .insight-title { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem; color: var(--oro-miele); }
+        .insight-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .insight-block h4 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; padding-left: 1rem; border-left: 2px solid var(--oro-miele); }
+        .insight-block p { font-size: 0.95rem; line-height: 1.8; opacity: 0.85; }
+
+        .report-footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(248,246,242,0.08); margin-top: 4rem; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; opacity: 0.6; margin-bottom: 1rem; }
+        .footer-meta { font-size: 0.8rem; opacity: 0.4; }
+
+        @media (max-width: 768px) {
+            .trend-table { font-size: 0.9rem; }
+            .trend-table th, .trend-table td { padding: 1rem; }
+            .section-number { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <p class="data-label">Social Intelligence Report</p>
+    <h1>Trend Italia</h1>
+    <p class="hero-subtitle">Analisi Evolutiva del Panorama Digitale Italiano - 10 Gennaio 2026</p>
+    <div class="mood-indicator">
+        <span class="mood-pill teso">TESO</span>
+        <span class="mood-pill diviso">DIVISO</span>
+        <span class="mood-pill resiliente">RESILIENTE</span>
+        <span class="mood-pill complesso">COMPLESSO</span>
+    </div>
+</section>
+
+<main class="container">
+
+<!-- SEZIONE 1: CRONACA BIANCA -->
+<div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Cronaca Bianca</h2>
+    <p class="section-subtitle">Emergenze naturali e risposta sociale</p>
+</div>
+
+<div class="category-card card-cronaca">
+    <div class="card-header">
+        <span class="card-title">🌍 Sisma nello Ionio</span>
+        <span class="card-badge">10 trending topics</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Trend</th>
+                    <th>Sintesi</th>
+                    <th>Sentiment</th>
+                    <th>Rilevanza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">#Terremoto</div>
+                        <div class="trend-hashtag">&lt;10.000 tweet • 4+ ore</div>
+                    </td>
+                    <td class="trend-content">Scossa di magnitudo 5.1 alle 05:53, epicentro in mare a 65km di profondità. Nessun danno segnalato. La profondità dell'ipocentro ha attenuato l'impatto strutturale pur provocando una vasta percezione nelle province di Reggio Calabria, Messina e Catania.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
+                        <span class="sentiment-tag sentiment-pragmatico">Pragmatico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Altissima</span>
+                        <div class="relevance-bar relevance-altissima">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Messina</div>
+                        <div class="trend-hashtag">&lt;10.000 tweet • 5+ ore</div>
+                    </td>
+                    <td class="trend-content">Conversazioni concentrate sulla memoria storica del terremoto del 1908 (magnitudo 7.1) e sulla vulnerabilità sismica dello Stretto. Richiamo alla pericolosità del sistema di faglie tra i più attivi del Mediterraneo.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
+                        <span class="sentiment-tag sentiment-critico">Critico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Reggio Calabria</div>
+                        <div class="trend-hashtag">&lt;10.000 tweet • 5+ ore</div>
+                    </td>
+                    <td class="trend-content">Conferme della Protezione Civile calabrese (Domenico Costarella) sull'assenza di danni. L'epicentro marino identificato come fattore determinante per la mancanza di criticità. Comunicazione istituzionale tempestiva ha mitigato l'allarmismo.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-pragmatico">Rassicurato</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- SEZIONE 2: POLITICA INTERNA -->
+<div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Politica Interna</h2>
+    <p class="section-subtitle">Conflitti istituzionali, sindacali e giudiziari</p>
+</div>
+
+<div class="category-card card-politica">
+    <div class="card-header">
+        <span class="card-title">⚖️ Sciopero & Dossieropoli</span>
+        <span class="card-badge">3 temi dominanti</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Trend</th>
+                    <th>Sintesi</th>
+                    <th>Sentiment</th>
+                    <th>Rilevanza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">Sciopero Nazionale 9-10 Gennaio</div>
+                        <div class="trend-hashtag">Trasporti & Istruzione</div>
+                    </td>
+                    <td class="trend-content">Mobilitazione che ha coinvolto trasporto ferroviario (FS, Trenitalia, RFI: 21:00-21:00), aereo (Vueling, EasyJet, 8-24h), scuola e trasporto locale. Rivendicazioni: aumenti salariali, sicurezza, contrasto al precariato. Polarizzazione tra diritto di sciopero (53% contrario a limitazioni) e disagio cittadini.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-indignato">Indignato</span>
+                        <span class="sentiment-tag sentiment-critico">Critico</span>
+                        <span class="sentiment-tag sentiment-determinato">Determinato</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Altissima</span>
+                        <div class="relevance-bar relevance-altissima">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">#conferenzastampa</div>
+                        <div class="trend-hashtag">&lt;10.000 tweet • 14+ ore</div>
+                    </td>
+                    <td class="trend-content">Conferenza di inizio anno di Giorgia Meloni (9 gennaio). Focus su rapporto con Trump, Groenlandia, annuncio "Strategia Italiana sull'Artico" per fine gennaio 2026. Posizione di cautela critica verso assertività USA.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-strategico">Strategico</span>
+                        <span class="sentiment-tag sentiment-pragmatico">Pragmatico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Dossieropoli</div>
+                        <div class="trend-hashtag">Bellavia vs Varisco</div>
+                    </td>
+                    <td class="trend-content">Inchiesta Procura Milano: furto 900GB di file riservati (1M+ documenti) da studio Gian Gaetano Bellavia (consulente procure/Report). Rinvio a giudizio Valentina Varisco per accesso abusivo. Dibattito diviso: "maxi-dossieraggio" vs "deposito tecnico legittimo". Vulnerabilità cybersecurity istituzionale.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-indignato">Indignato</span>
+                        <span class="sentiment-tag sentiment-critico">Critico</span>
+                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Altissima</span>
+                        <div class="relevance-bar relevance-altissima">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- SEZIONE 3: GEOPOLITICA -->
+<div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Geopolitica</h2>
+    <p class="section-subtitle">Tensioni transatlantiche e strategia artica</p>
+</div>
+
+<div class="category-card card-geopolitica">
+    <div class="card-header">
+        <span class="card-title">🌐 Caso Groenlandia & Artico</span>
+        <span class="card-badge">4 trend internazionali</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Trend</th>
+                    <th>Sintesi</th>
+                    <th>Sentiment</th>
+                    <th>Rilevanza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">#DigitalBlackoutIran</div>
+                        <div class="trend-hashtag">658.300 tweet globali • 15+ ore</div>
+                    </td>
+                    <td class="trend-content">Trend globale su blackout digitale in Iran. Rilevanza per utenza italiana come indicatore di tensioni geopolitiche in Medio Oriente e questioni di diritti umani/censura digitale.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
+                        <span class="sentiment-tag sentiment-critico">Critico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Media-Alta</span>
+                        <div class="relevance-bar relevance-media-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Mercosur</div>
+                        <div class="trend-hashtag">285.400 tweet globali • 8+ ore</div>
+                    </td>
+                    <td class="trend-content">Discussioni sull'accordo commerciale UE-Mercosur. Implicazioni economiche internazionali per commercio estero italiano (Italia 14° partner globale per export).</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-strategico">Strategico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Media</span>
+                        <div class="relevance-bar relevance-media">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Starlink</div>
+                        <div class="trend-hashtag">247.400 tweet globali • 6+ ore</div>
+                    </td>
+                    <td class="trend-content">Tecnologia/connettività satellitare. Possibile collegamento con discussioni su sovranità digitale e infrastrutture critiche nel contesto del caso Dossieropoli.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-pragmatico">Tecnico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Media</span>
+                        <div class="relevance-bar relevance-media">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Groenlandia - Strategia Artica IT</div>
+                        <div class="trend-hashtag">Meloni vs Trump</div>
+                    </td>
+                    <td class="trend-content">Meloni dichiara improbabile azione militare USA per controllo Groenlandia (non condividerebbe). Annuncio Strategia Italiana Artico (Farnesina, fine gennaio 2026) per preservare zona di pace e rafforzare NATO. Preoccupazione "neo-colonialismo" USA (accordo Cofa bypassando Danimarca).</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-strategico">Strategico</span>
+                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
+                        <span class="sentiment-tag sentiment-determinato">Determinato</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Altissima</span>
+                        <div class="relevance-bar relevance-altissima">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- SEZIONE 4: ECONOMIA E FINANZA -->
+<div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Economia e Finanza</h2>
+    <p class="section-subtitle">Manovra 2026 e dinamiche macroeconomiche</p>
+</div>
+
+<div class="category-card card-economia">
+    <div class="card-header">
+        <span class="card-title">💰 Legge di Bilancio & PIL</span>
+        <span class="card-badge">7 misure cardine</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Misura</th>
+                    <th>Dettagli</th>
+                    <th>Sentiment</th>
+                    <th>Rilevanza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">Revisione IRPEF</div>
+                        <div class="trend-hashtag">Ceto medio</div>
+                    </td>
+                    <td class="trend-content">Taglio seconda aliquota dal 35% al 33% per redditi 28-50k€. Obiettivo: sostegno ceto medio e riduzione pressione fiscale.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-entusiasta">Favorevole</span>
+                        <span class="sentiment-tag sentiment-pragmatico">Pragmatico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Fondo Sanitario Nazionale</div>
+                        <div class="trend-hashtag">+2.382 milioni €</div>
+                    </td>
+                    <td class="trend-content">Incremento 2.382M€ per 2026. Potenziamento sanità pubblica, contrasto liste d'attesa.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-entusiasta">Necessario</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Tassazione Banche</div>
+                        <div class="trend-hashtag">305M€ dai profitti</div>
+                    </td>
+                    <td class="trend-content">Stretta deducibilità perdite (da 45% a 35%). Reperimento 305M€ nel 2026 da profitti bancari.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-critico">Critico</span>
+                        <span class="sentiment-tag sentiment-indignato">Contestato</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Media-Alta</span>
+                        <div class="relevance-bar relevance-media-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Riserve Auree</div>
+                        <div class="trend-hashtag">Sovranità nazionale</div>
+                    </td>
+                    <td class="trend-content">Dichiarazione appartenenza oro Banca d'Italia al "popolo italiano". Affermazione simbolica sovranità nazionale. Implicazioni rapporti BCE/Trattato UE da analizzare.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-determinato">Sovranista</span>
+                        <span class="sentiment-tag sentiment-critico">Critico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Affitti Brevi</div>
+                        <div class="trend-hashtag">Cedolare secca</div>
+                    </td>
+                    <td class="trend-content">21% (1° immobile), 26% dal 2°; regime impresa dal 3°. Regolazione mercato immobiliare, contrasto overtourism.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-critico">Diviso</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Media-Alta</span>
+                        <div class="relevance-bar relevance-media-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">PIL Italia 2019-2025</div>
+                        <div class="trend-hashtag">+6,4% vs +0,2% Germania</div>
+                    </td>
+                    <td class="trend-content">Crescita reale: ITA +6,4%, Francia +5%, Germania +0,2%, Spagna +10%. Mezzogiorno traina, Nord rallenta (Veneto/Trentino +5,1%, Friuli +1,9%). Italia 14° partner export globale, 13° surplus commerciale.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-entusiasta">Positivo</span>
+                        <span class="sentiment-tag sentiment-pragmatico">Cauto</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- SEZIONE 5: CULTURA E SPETTACOLO -->
+<div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Cultura e Spettacolo</h2>
+    <p class="section-subtitle">Second screen e cronaca internazionale</p>
+</div>
+
+<div class="category-card card-intrattenimento">
+    <div class="card-header">
+        <span class="card-title">📺 TV & Tragedia Crans-Montana</span>
+        <span class="card-badge">3 trend entertainment</span>
+    </div>
+    <div class="card-body">
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Trend</th>
+                    <th>Sintesi</th>
+                    <th>Sentiment</th>
+                    <th>Rilevanza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="trend-name">#QuartoGrado</div>
+                        <div class="trend-hashtag">&lt;10.000 tweet • 11+ ore</div>
+                    </td>
+                    <td class="trend-content">Fenomeno "second screen": la televisione generalista continua a dettare l'agenda delle conversazioni serali/notturne, estendendo influenza fino al mattino successivo. Persistenza dell'intrattenimento investigativo.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-entusiasta">Coinvolto</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Media</span>
+                        <div class="relevance-bar relevance-media">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">#TalieQuali</div>
+                        <div class="trend-hashtag">&lt;10.000 tweet • 11+ ore • Rai 1</div>
+                    </td>
+                    <td class="trend-content">Entertainment Rai 1. Conferma del fenomeno second screen con longevità 11+ ore. Dimostrazione di come la TV generalista mantenga capacità di generare conversazioni digitali prolungate.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-entusiasta">Divertito</span>
+                        <span class="sentiment-tag sentiment-ironico">Ironico</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Media</span>
+                        <div class="relevance-bar relevance-media">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="trend-name">Tragedia Crans-Montana</div>
+                        <div class="trend-hashtag">40 morti, 6 italiani</div>
+                    </td>
+                    <td class="trend-content">Rogo bar "Le Constellation" (Svizzera): 40 morti, 116 feriti. Interrogatori proprietari Moretti. Video virale "cuore sulla neve" come elaborazione lutto collettivo. Indignazione per uscite sicurezza chiuse/nascoste. Questionamento sicurezza locali pubblici.</td>
+                    <td>
+                        <span class="sentiment-tag sentiment-indignato">Indignato</span>
+                        <span class="sentiment-tag sentiment-preoccupato">Dolente</span>
+                    </td>
+                    <td>
+                        <span class="relevance-label">Alta</span>
+                        <div class="relevance-bar relevance-alta">
+                            <div class="relevance-fill"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- INSIGHT SOCIOLOGICI -->
+<section class="insight-section">
+    <h3 class="insight-title">💡 Insight Sociologici del 10 Gennaio 2026</h3>
+    <div class="insight-content">
+        <div class="insight-block">
+            <h4>1. Sicurezza Nazionale Asimmetrica: Faglie Fisiche vs Digitali</h4>
+            <p>Il paradosso dell'Italia emerge chiaramente: eccellenza nella gestione dell'emergenza fisica (sisma nello Ionio senza danni grazie a prevenzione e ipocentro profondo) ma fallimento clamoroso nella protezione dell'infrastruttura informativa (furto 900GB file riservati nel caso Dossieropoli). Questo svela una vulnerabilità sistemica: investimenti insufficienti in cybersecurity istituzionale e cultura di protezione dati. La necessità di riforma profonda nella gestione dei consulenti esterni dello Stato è urgente.</p>
+        </div>
+        <div class="insight-block">
+            <h4>2. X come Sistema di Allerta Partecipata</h4>
+            <p>Il terremoto dimostra che X opera in Italia secondo un modello di "allerta partecipata": la validazione sociale dell'evento precede la comunicazione istituzionale. Migliaia di utenti interagiscono simultaneamente nei minuti post-scossa, creando un sensore informale. Tuttavia, il vuoto informativo dei primi 15 minuti rischia di essere colmato da disinformazione. Necessaria presenza istituzionale ancora più capillare e reattiva sulle piattaforme social.</p>
+        </div>
+        <div class="insight-block">
+            <h4>3. Sciopero nell'Era Digitale: Diritto vs Servizio</h4>
+            <p>La mobilitazione 9-10 gennaio rivela polarizzazione profonda. Nonostante disagi (blocco trasporti/scuola post-festività), il 53% della popolazione si oppone a limitazioni del diritto di sciopero, segnalando solidarietà radicata verso classi lavoratrici. Paradosso: Italia cresce PIL più della Germania (+6,4% vs +0,2% 2019-2025) ma non garantisce servizi pubblici efficienti o stipendi competitivi. Necessità di nuovo patto sociale tra sostenibilità bilancio e qualità lavoro pubblico.</p>
+        </div>
+        <div class="insight-block">
+            <h4>4. Geopolitica dell'Artico: Mediterraneo Proiettato al Polo Nord</h4>
+            <p>L'annuncio della Strategia Italiana sull'Artico (fine gennaio 2026) segna un cambio paradigmatico: l'Italia, nazione mediterranea, ridefinisce il perimetro di influenza proiettandosi verso il Polo Nord. Equilibrio delicato tra fedeltà atlantica (alleanza USA/NATO) e difesa integrità partner europei (Danimarca). Preoccupazione per "neo-colonialismo strategico" USA (accordo Cofa con Groenlandia bypassando Copenaghen). Materie prime critiche e stabilità NATO al centro dell'interesse nazionale italiano.</p>
+        </div>
+        <div class="insight-block">
+            <h4>5. Etica del Controllo: Doppio Standard Stato</h4>
+            <p>Tensione filosofica: lo Stato cerca di controllare/tassare affitti brevi (cedolare 26% dal 2° immobile) per preservare identità città, ma perde controllo sui propri dossier segreti (Dossieropoli). Il dibattito esplora il paradosso tra necessità di regolamentazione (overtourism, speculazione immobiliare) e fragilità sistemi di sorveglianza pubblica/privata. Questionamento: come può uno Stato regolare i cittadini se non riesce a proteggere le proprie informazioni sensibili?</p>
+        </div>
+        <div class="insight-block">
+            <h4>6. Second Screen: TV Generalista Resiste al Digitale</h4>
+            <p>La persistenza di #QuartoGrado e #TalieQuali per 11+ ore dimostra che la televisione generalista mantiene capacità di dettare l'agenda conversazionale, estendendo l'influenza fino al mattino successivo. Fenomeno second screen confermato: mentre consumano contenuti TV, gli utenti commentano simultaneamente su X, creando sovrapposizione spazio fisico (salotto) e digitale (timeline). La TV non è morta, ma si è trasformata in esperienza ibrida.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SEZIONE METODOLOGIA -->
+<div class="section-header">
+    <span class="section-number">06</span>
+    <h2 class="section-title">Metodologia & Roadmap Editoriale</h2>
+    <p class="section-subtitle">Approccio analitico e strategie future</p>
+</div>
+
+<div class="category-card card-sentiment">
+    <div class="card-header">
+        <span class="card-title">🔬 Approccio Metodologico</span>
+        <span class="card-badge">Analisi qualitativa</span>
+    </div>
+    <div class="card-body" style="padding: 2.5rem;">
+        <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 1rem; color: var(--oro-miele);">Fonti e Raccolta Dati</h4>
+        <p style="margin-bottom: 2rem; opacity: 0.85; line-height: 1.8;">I dati di questo report provengono dall'analisi manuale del panorama digitale italiano su X nella giornata del 10 gennaio 2026. Le tendenze sono state categorizzate secondo le 16 categorie del blog, utilizzando keyword matching semantico e validazione contestuale. I volumi conversazionali sono stati stimati attraverso l'analisi dei trending topics e la persistenza temporale degli hashtag.</p>
+
+        <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 1rem; color: var(--oro-miele);">Roadmap Editoriale Suggerita</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--rosso-tensione);">
+                <strong style="display: block; margin-bottom: 0.5rem;">🔒 Sicurezza Nazionale</strong>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Editoriale su "vulnerabilità infrastruttura Italia": eccellenza gestione emergenze fisiche vs fallimento protezione dati (Dossieropoli). Investimenti tecnologia e cultura protezione dati.</p>
+            </div>
+            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--blu-profondo);">
+                <strong style="display: block; margin-bottom: 0.5rem;">❄️ Geopolitica Artico</strong>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Approfondimento Strategia Italiana Artico: perché la Groenlandia è fondamentale per l'interesse nazionale italiano. Materie prime critiche, stabilità NATO, risposta UE a Trump.</p>
+            </div>
+            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--oro-miele);">
+                <strong style="display: block; margin-bottom: 0.5rem;">⚙️ Futuro del Lavoro</strong>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Riflessione su sciopero 9-10 gennaio: paradosso di un paese che cresce più della Germania ma non garantisce servizi pubblici efficienti. Verso un nuovo patto sociale?</p>
+            </div>
+            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--verde-oliva);">
+                <strong style="display: block; margin-bottom: 0.5rem;">🎯 Etica del Controllo</strong>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Analisi filosofica: Stato controlla/tassa affitti brevi ma perde controllo dossier segreti. Tensione tra necessità regolamentazione e fragilità sorveglianza pubblica/privata.</p>
+            </div>
+        </div>
+
+        <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 2rem 0 1rem; color: var(--oro-miele);">Limitazioni</h4>
+        <ul style="margin-left: 1.5rem; opacity: 0.8; line-height: 1.8;">
+            <li>Volumi tweet stimati (non dati API ufficiali)</li>
+            <li>Sentiment analysis qualitativa (non algoritmica)</li>
+            <li>Categorizzazione manuale (soggetta a interpretazione)</li>
+            <li>Snapshot temporale (mattina 10 gennaio 2026)</li>
+            <li>Focus su trending topics italiani (esclude conversazioni non-virali)</li>
+        </ul>
+    </div>
+</div>
+
+</main>
+
+<footer class="report-footer">
+    <div class="footer-logo">Social Intelligence Report</div>
+    <p class="footer-meta">Analisi generata il 10 Gennaio 2026 — Dati aggregati da X (Twitter) Italia</p>
+    <p class="footer-meta" style="margin-top: 0.5rem; opacity: 0.3;">Progetto Analisi_social — Categorizzazione editoriale su 16 tematiche del blog</p>
+</footer>
+
+</body>
+</html>
