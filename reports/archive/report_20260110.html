@@ -23,7 +23,7 @@
         .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(196,58,49,0.15) 0%, transparent 50%), linear-gradient(225deg, rgba(26,54,93,0.2) 0%, transparent 50%), var(--nero-profondo); }
         .data-label { font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--oro-miele); margin-bottom: 1rem; font-weight: 600; }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--bianco-caldo) 0%, var(--oro-miele) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-subtitle { font-size: 1.3rem; font-weight: 300; max-width: 600px; opacity: 0.8; margin-bottom: 3rem; }
+        .hero-subtitle { font-size: 1.3rem; font-weight: 300; max-width: 700px; opacity: 0.8; margin-bottom: 3rem; line-height: 1.6; }
         .mood-indicator { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
         .mood-pill { padding: 0.6rem 1.5rem; border: 1px solid rgba(248,246,242,0.2); border-radius: 50px; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
         .mood-pill.teso { border-color: var(--rosso-tensione); color: var(--rosso-tensione); }
@@ -36,6 +36,7 @@
         .section-number { font-family: 'Playfair Display', serif; font-size: 8rem; font-weight: 900; position: absolute; top: 2rem; left: -1rem; opacity: 0.05; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
         .section-subtitle { font-size: 1rem; opacity: 0.6; font-weight: 300; }
+        .section-intro { font-size: 1.05rem; line-height: 1.8; opacity: 0.9; margin: 2rem 0; padding: 2rem; background: rgba(0,0,0,0.2); border-radius: 12px; border-left: 3px solid var(--oro-miele); }
 
         .category-card { background: var(--grigio-ardesia); border-radius: 16px; margin-bottom: 4rem; overflow: hidden; position: relative; }
         .category-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
@@ -44,54 +45,53 @@
         .card-intrattenimento::before { background: linear-gradient(90deg, var(--oro-miele), #b8860b); }
         .card-geopolitica::before { background: linear-gradient(90deg, var(--blu-profondo), var(--azzurro-ghiaccio)); }
         .card-economia::before { background: linear-gradient(90deg, var(--oro-miele), #b8860b); }
-        .card-sentiment::before { background: linear-gradient(90deg, #6b4c8a, #9b6ba3); }
+        .card-analisi::before { background: linear-gradient(90deg, #6b4c8a, #9b6ba3); }
 
-        .card-header { padding: 2rem 2.5rem; border-bottom: 1px solid rgba(248,246,242,0.08); display: flex; justify-content: space-between; align-items: center; }
+        .card-header { padding: 2rem 2.5rem; border-bottom: 1px solid rgba(248,246,242,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
         .card-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; }
         .card-badge { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 20px; background: rgba(248,246,242,0.1); }
 
-        .trend-table { width: 100%; border-collapse: collapse; }
-        .trend-table thead { background: rgba(0,0,0,0.3); }
-        .trend-table th { padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro-miele); }
-        .trend-table td { padding: 1.5rem; border-bottom: 1px solid rgba(248,246,242,0.05); vertical-align: top; }
-        .trend-table tbody tr:hover { background: rgba(248,246,242,0.03); }
-        .trend-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; }
-        .trend-hashtag { font-size: 0.85rem; opacity: 0.5; }
-        .trend-content { font-size: 0.95rem; line-height: 1.6; opacity: 0.85; }
+        .card-body { padding: 2.5rem; }
+        .card-body p { font-size: 1rem; line-height: 1.8; opacity: 0.9; margin-bottom: 1.5rem; }
+        .card-body ul { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        .card-body li { margin-bottom: 0.8rem; opacity: 0.9; line-height: 1.7; }
 
-        .sentiment-tag { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin: 0.2rem; }
-        .sentiment-indignato { background: rgba(196,58,49,0.2); color: #e85a52; }
-        .sentiment-critico { background: rgba(212,165,116,0.2); color: var(--oro-miele); }
-        .sentiment-preoccupato { background: rgba(126,184,218,0.2); color: var(--azzurro-ghiaccio); }
-        .sentiment-entusiasta { background: rgba(74,82,64,0.3); color: #8db580; }
-        .sentiment-deluso { background: rgba(139,90,43,0.2); color: #c4956a); }
-        .sentiment-ironico { background: rgba(107,76,138,0.2); color: #b088c9; }
-        .sentiment-strategico { background: rgba(26,54,93,0.3); color: var(--azzurro-ghiaccio); }
-        .sentiment-determinato { background: rgba(196,58,49,0.2); color: #e85a52; }
-        .sentiment-pragmatico { background: rgba(74,82,64,0.3); color: #8db580; }
-
-        .relevance-bar { width: 100px; height: 6px; background: rgba(248,246,242,0.1); border-radius: 3px; overflow: hidden; margin-top: 0.5rem; }
-        .relevance-fill { height: 100%; border-radius: 3px; }
-        .relevance-altissima .relevance-fill { width: 100%; background: var(--rosso-tensione); }
-        .relevance-alta .relevance-fill { width: 80%; background: var(--oro-miele); }
-        .relevance-media-alta .relevance-fill { width: 65%; background: var(--azzurro-ghiaccio); }
-        .relevance-media .relevance-fill { width: 50%; background: var(--verde-oliva); }
-        .relevance-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+        .data-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+        .data-table thead { background: rgba(0,0,0,0.3); }
+        .data-table th { padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro-miele); font-weight: 700; border-bottom: 2px solid rgba(212,165,116,0.3); }
+        .data-table td { padding: 1.2rem 1.5rem; border-bottom: 1px solid rgba(248,246,242,0.05); vertical-align: top; font-size: 0.95rem; }
+        .data-table tbody tr:hover { background: rgba(248,246,242,0.03); }
+        .data-table .highlight-cell { font-weight: 700; color: var(--oro-miele); }
 
         .insight-section { background: linear-gradient(135deg, var(--grigio-ardesia), var(--grigio-medio)); border-radius: 16px; padding: 3rem; margin: 4rem 0; position: relative; }
         .insight-title { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem; color: var(--oro-miele); }
-        .insight-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .insight-block h4 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; padding-left: 1rem; border-left: 2px solid var(--oro-miele); }
+        .insight-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .insight-block h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; padding-left: 1rem; border-left: 3px solid var(--oro-miele); }
         .insight-block p { font-size: 0.95rem; line-height: 1.8; opacity: 0.85; }
+
+        .bibliografia-section { background: var(--grigio-ardesia); border-radius: 16px; padding: 3rem; margin: 4rem 0; }
+        .bibliografia-section h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem; color: var(--oro-miele); }
+        .bib-item { margin-bottom: 1.2rem; padding-left: 2rem; position: relative; font-size: 0.9rem; line-height: 1.6; opacity: 0.85; }
+        .bib-item::before { content: attr(data-num); position: absolute; left: 0; font-weight: 700; color: var(--oro-miele); }
+        .bib-item a { color: var(--azzurro-ghiaccio); text-decoration: none; word-break: break-all; }
+        .bib-item a:hover { color: var(--oro-miele); text-decoration: underline; }
+
+        .citation { font-size: 0.75em; vertical-align: super; color: var(--azzurro-ghiaccio); font-weight: 600; margin: 0 0.1em; }
 
         .report-footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid rgba(248,246,242,0.08); margin-top: 4rem; }
         .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; opacity: 0.6; margin-bottom: 1rem; }
         .footer-meta { font-size: 0.8rem; opacity: 0.4; }
 
+        .phase-list { background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px; margin: 2rem 0; }
+        .phase-item { margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--azzurro-ghiaccio); }
+        .phase-item h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--azzurro-ghiaccio); }
+        .phase-item p { font-size: 0.95rem; opacity: 0.85; line-height: 1.7; }
+
         @media (max-width: 768px) {
-            .trend-table { font-size: 0.9rem; }
-            .trend-table th, .trend-table td { padding: 1rem; }
             .section-number { font-size: 4rem; }
+            .data-table { font-size: 0.85rem; }
+            .data-table th, .data-table td { padding: 0.8rem; }
+            .card-body { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -101,7 +101,7 @@
 <section class="hero">
     <p class="data-label">Social Intelligence Report</p>
     <h1>Trend Italia</h1>
-    <p class="hero-subtitle">Analisi Evolutiva del Panorama Digitale Italiano - 10 Gennaio 2026</p>
+    <p class="hero-subtitle">Rapporto Sistemico sui Trend di X in Italia: Analisi Evolutiva del 10 Gennaio 2026</p>
     <div class="mood-indicator">
         <span class="mood-pill teso">TESO</span>
         <span class="mood-pill diviso">DIVISO</span>
@@ -112,550 +112,515 @@
 
 <main class="container">
 
-<!-- SEZIONE 1: CRONACA BIANCA -->
+<!-- INTRODUZIONE -->
+<div class="section-intro">
+    <p>L'analisi del panorama digitale italiano su X, condotta nella giornata del 10 gennaio 2026, rivela un ecosistema informativo di eccezionale densità, dove la reattività in tempo reale agli eventi naturali si intreccia con profonde tensioni sociali, dispute geopolitiche di carattere transatlantico e una complessa dialettica politico-giudiziaria. La piattaforma X, consolidata nel suo ruolo di sensore primario della pubblica opinione, manifesta una stratificazione di contenuti che spaziano dall'urgenza sismica alla mobilitazione sindacale, offrendo una mappa dettagliata delle preoccupazioni e degli interessi della cittadinanza italiana.</p>
+</div>
+
+<!-- SEZIONE 1: ANALISI QUANTITATIVA -->
 <div class="section-header">
     <span class="section-number">01</span>
-    <h2 class="section-title">Cronaca Bianca</h2>
-    <p class="section-subtitle">Emergenze naturali e risposta sociale</p>
+    <h2 class="section-title">Analisi Quantitativa dei Trend</h2>
+    <p class="section-subtitle">Il pulsante digitale del paese</p>
+</div>
+
+<div class="category-card card-analisi">
+    <div class="card-header">
+        <span class="card-title">📊 Distribuzione dei Topic e Volumi Conversazionali</span>
+        <span class="card-badge">Top 10 Trending</span>
+    </div>
+    <div class="card-body">
+        <p>La struttura delle tendenze nella mattinata del 10 gennaio 2026 evidenzia una chiara gerarchia di urgenze. La velocità di ascesa (velocity) di determinati hashtag indica come eventi imprevisti, come il sisma nello Ionio, siano in grado di saturare lo spazio conversazionale in tempi ridottissimi, superando la massa critica di trend globali o programmati.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Posizione</th>
+                    <th>Topic / Hashtag</th>
+                    <th>Volume Tweet</th>
+                    <th>Natura del Trend</th>
+                    <th>Longevità (h)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="highlight-cell">1</td>
+                    <td>#Terremoto</td>
+                    <td>&lt; 10.000 (Burst)</td>
+                    <td>Evento Naturale / Urgenza</td>
+                    <td>4+</td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">2</td>
+                    <td>#10gennaio</td>
+                    <td>&lt; 10.000</td>
+                    <td>Cronologico / Rituale</td>
+                    <td>12+</td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">3</td>
+                    <td>#QuartoGrado</td>
+                    <td>&lt; 10.000</td>
+                    <td>Entertainment / Second Screen</td>
+                    <td>11+</td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">4</td>
+                    <td>#DigitalBlackoutIran</td>
+                    <td>658.300 (Globale)</td>
+                    <td>Geopolitica / Diritti Umani</td>
+                    <td>15+</td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">5</td>
+                    <td>Messina</td>
+                    <td>&lt; 10.000</td>
+                    <td>Geografico / Sismico</td>
+                    <td>5+</td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">6</td>
+                    <td>Reggio Calabria</td>
+                    <td>&lt; 10.000</td>
+                    <td>Geografico / Sismico</td>
+                    <td>5+</td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">7</td>
+                    <td>#TalieQuali</td>
+                    <td>&lt; 10.000</td>
+                    <td>Entertainment / Rai 1</td>
+                    <td>11+</td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">8</td>
+                    <td>Mercosur</td>
+                    <td>285.400 (Globale)</td>
+                    <td>Economia Internazionale</td>
+                    <td>8+</td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">9</td>
+                    <td>#conferenzastampa</td>
+                    <td>&lt; 10.000</td>
+                    <td>Politica Nazionale</td>
+                    <td>14+</td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">10</td>
+                    <td>Starlink</td>
+                    <td>247.400 (Globale)</td>
+                    <td>Tecnologia / Connettività</td>
+                    <td>6+</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>La rilevazione dei dati evidenzia come, nonostante il volume assoluto dei tweet sia dominato da tematiche internazionali come il blackout digitale in Iran o le discussioni sull'accordo Mercosur, la pertinenza locale sia guidata dalla prossimità geografica e dall'impatto immediato sulla vita dei cittadini<span class="citation">1</span>. Il termine #Terremoto, pur non raggiungendo i seicentomila tweet del trend iraniano, occupa la posizione di vertice per l'utenza italiana a causa della sincronicità della partecipazione: migliaia di utenti hanno interagito simultaneamente nell'arco di pochi minuti dopo la scossa delle 05:53<span class="citation">3</span>.</p>
+
+        <p>Questa dinamica suggerisce che X operi in Italia secondo un modello di <strong>"allerta partecipata"</strong>, dove la validazione sociale dell'evento precede spesso la comunicazione istituzionale. La longevità di trend come #QuartoGrado e #TalieQuali (entrambi in tendenza da oltre 11 ore) dimostra invece la persistenza del fenomeno del <strong>second screen</strong>, dove la televisione generalista continua a dettare l'agenda delle conversazioni serali e notturne, estendendo la sua influenza fino alle prime ore del mattino successivo<span class="citation">1</span>.</p>
+    </div>
+</div>
+
+<!-- SEZIONE 2: TERREMOTO IONIO -->
+<div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Sisma nello Ionio</h2>
+    <p class="section-subtitle">Tra paura e infrastruttura informativa</p>
 </div>
 
 <div class="category-card card-cronaca">
     <div class="card-header">
-        <span class="card-title">🌍 Sisma nello Ionio</span>
-        <span class="card-badge">10 trending topics</span>
+        <span class="card-title">🌍 Terremoto Magnitudo 5.1</span>
+        <span class="card-badge">Epicentro Marino • 65km profondità</span>
     </div>
     <div class="card-body">
-        <table class="trend-table">
-            <thead>
-                <tr>
-                    <th>Trend</th>
-                    <th>Sintesi</th>
-                    <th>Sentiment</th>
-                    <th>Rilevanza</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="trend-name">#Terremoto</div>
-                        <div class="trend-hashtag">&lt;10.000 tweet • 4+ ore</div>
-                    </td>
-                    <td class="trend-content">Scossa di magnitudo 5.1 alle 05:53, epicentro in mare a 65km di profondità. Nessun danno segnalato. La profondità dell'ipocentro ha attenuato l'impatto strutturale pur provocando una vasta percezione nelle province di Reggio Calabria, Messina e Catania.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
-                        <span class="sentiment-tag sentiment-pragmatico">Pragmatico</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Altissima</span>
-                        <div class="relevance-bar relevance-altissima">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="trend-name">Messina</div>
-                        <div class="trend-hashtag">&lt;10.000 tweet • 5+ ore</div>
-                    </td>
-                    <td class="trend-content">Conversazioni concentrate sulla memoria storica del terremoto del 1908 (magnitudo 7.1) e sulla vulnerabilità sismica dello Stretto. Richiamo alla pericolosità del sistema di faglie tra i più attivi del Mediterraneo.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
-                        <span class="sentiment-tag sentiment-critico">Critico</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Alta</span>
-                        <div class="relevance-bar relevance-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="trend-name">Reggio Calabria</div>
-                        <div class="trend-hashtag">&lt;10.000 tweet • 5+ ore</div>
-                    </td>
-                    <td class="trend-content">Conferme della Protezione Civile calabrese (Domenico Costarella) sull'assenza di danni. L'epicentro marino identificato come fattore determinante per la mancanza di criticità. Comunicazione istituzionale tempestiva ha mitigato l'allarmismo.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-pragmatico">Rassicurato</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Alta</span>
-                        <div class="relevance-bar relevance-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <p>Alle ore 05:53 del 10 gennaio 2026, un evento sismico di magnitudo 5.1 ha interessato la costa calabra sud-orientale, con epicentro localizzato in mare a una profondità di 65 chilometri<span class="citation">3</span>. Sebbene la profondità dell'ipocentro abbia attenuato i potenziali danni strutturali, la percezione della scossa è stata vasta, coinvolgendo le province di Reggio Calabria, Messina e Catania, e provocando un'immediata ondata di attività su X.</p>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 2rem 0 1rem; color: var(--oro-miele);">Cronologia della Conversazione Sismica</h3>
+
+        <div class="phase-list">
+            <div class="phase-item">
+                <h4>Fase 1: Shock e Verifica (0-15 minuti)</h4>
+                <p>Picco di post contenenti interrogative dirette e geolocalizzate, dove l'utenza cercava conferma del fenomeno appena avvertito. Domande come "Avete sentito anche voi?" dominano la timeline<span class="citation">4</span>.</p>
+            </div>
+            <div class="phase-item">
+                <h4>Fase 2: Notiziabilità (15-45 minuti)</h4>
+                <p>Le agenzie di stampa e le testate digitali iniziano a diffondere i dati ufficiali dell'INGV, permettendo agli utenti di associare la percezione fisica a parametri scientifici (magnitudo, profondità, epicentro)<span class="citation">3</span>.</p>
+            </div>
+            <div class="phase-item">
+                <h4>Fase 3: Rassicurazione Istituzionale (45+ minuti)</h4>
+                <p>Dichiarazioni della Protezione Civile attraverso il monitoraggio dei Vigili del Fuoco e delle sale operative regionali confermano l'assenza di danni a persone o edifici<span class="citation">3</span>.</p>
+            </div>
+        </div>
+
+        <p>Il ruolo di <strong>Domenico Costarella</strong>, capo della Protezione civile calabrese, è stato centrale nel mitigare il potenziale allarmismo, grazie a una comunicazione tempestiva che ha sottolineato come l'epicentro marino sia stato un fattore determinante per l'assenza di criticità<span class="citation">6</span>. Tuttavia, la conversazione su X ha rapidamente trasceso l'evento contingente per ricollegarsi alla memoria storica e alla vulnerabilità sismica dello Stretto di Messina. Il richiamo al disastro del 1908 (magnitudo 7.1) è riemerso come termine di paragone per sottolineare la pericolosità di un sistema di faglie tra i più attivi del Mediterraneo<span class="citation">4</span>.</p>
+
+        <p style="background: rgba(212,165,116,0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--oro-miele); margin-top: 2rem;"><strong>Insight Editoriale:</strong> Questo evento evidenzia un'opportunità significativa per l'approfondimento della psicologia dell'emergenza digitale. La capacità di X di agire come un sistema di allerta precoce informale pone interrogativi sulla gestione dei dati in tempo reale e sulla necessità di una presenza istituzionale ancora più capillare e reattiva su queste piattaforme, per evitare che il vuoto informativo dei primi minuti venga colmato da disinformazione o panico ingiustificato.</p>
     </div>
 </div>
 
-<!-- SEZIONE 2: POLITICA INTERNA -->
+<!-- SEZIONE 3: SCIOPERO -->
 <div class="section-header">
-    <span class="section-number">02</span>
-    <h2 class="section-title">Politica Interna</h2>
-    <p class="section-subtitle">Conflitti istituzionali, sindacali e giudiziari</p>
+    <span class="section-number">03</span>
+    <h2 class="section-title">Sciopero Nazionale 9-10 Gennaio</h2>
+    <p class="section-subtitle">Conflittualità del lavoro e servizi pubblici</p>
 </div>
 
 <div class="category-card card-politica">
     <div class="card-header">
-        <span class="card-title">⚖️ Sciopero & Dossieropoli</span>
-        <span class="card-badge">3 temi dominanti</span>
+        <span class="card-title">⚙️ Mobilitazione Sindacale</span>
+        <span class="card-badge">Trasporti & Istruzione</span>
     </div>
     <div class="card-body">
-        <table class="trend-table">
+        <p>Il secondo grande asse conversazionale della giornata è rappresentato dalla mobilitazione sindacale che ha colpito settori nevralgici come i trasporti e l'istruzione. Lo sciopero generale, programmato per le giornate del 9 e 10 gennaio 2026, si è manifestato su X come un terreno di scontro tra le rivendicazioni dei lavoratori e il disagio dei cittadini-utenti.</p>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 2rem 0 1rem; color: var(--oro-miele);">Analisi dell'Impatto per Settore</h3>
+
+        <table class="data-table">
             <thead>
                 <tr>
-                    <th>Trend</th>
-                    <th>Sintesi</th>
-                    <th>Sentiment</th>
-                    <th>Rilevanza</th>
+                    <th>Comparto</th>
+                    <th>Entità Coinvolte</th>
+                    <th>Orari e Modalità</th>
+                    <th>Rivendicazioni Principali</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>
-                        <div class="trend-name">Sciopero Nazionale 9-10 Gennaio</div>
-                        <div class="trend-hashtag">Trasporti & Istruzione</div>
-                    </td>
-                    <td class="trend-content">Mobilitazione che ha coinvolto trasporto ferroviario (FS, Trenitalia, RFI: 21:00-21:00), aereo (Vueling, EasyJet, 8-24h), scuola e trasporto locale. Rivendicazioni: aumenti salariali, sicurezza, contrasto al precariato. Polarizzazione tra diritto di sciopero (53% contrario a limitazioni) e disagio cittadini.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-indignato">Indignato</span>
-                        <span class="sentiment-tag sentiment-critico">Critico</span>
-                        <span class="sentiment-tag sentiment-determinato">Determinato</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Altissima</span>
-                        <div class="relevance-bar relevance-altissima">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
+                    <td class="highlight-cell">Trasporto Ferroviario</td>
+                    <td>Gruppo FS Italiane, Trenitalia, RFI</td>
+                    <td>Dalle 21:00 del 9 alle 21:00 del 10 gennaio</td>
+                    <td>Aumenti salariali, sicurezza sul lavoro, rinnovo contrattuale<span class="citation">8</span></td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class="trend-name">#conferenzastampa</div>
-                        <div class="trend-hashtag">&lt;10.000 tweet • 14+ ore</div>
-                    </td>
-                    <td class="trend-content">Conferenza di inizio anno di Giorgia Meloni (9 gennaio). Focus su rapporto con Trump, Groenlandia, annuncio "Strategia Italiana sull'Artico" per fine gennaio 2026. Posizione di cautela critica verso assertività USA.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-strategico">Strategico</span>
-                        <span class="sentiment-tag sentiment-pragmatico">Pragmatico</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Alta</span>
-                        <div class="relevance-bar relevance-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
+                    <td class="highlight-cell">Trasporto Aereo</td>
+                    <td>Vueling, EasyJet, Swissport Italia, Assohandler</td>
+                    <td>Scioperi di 8-24 ore (9 gennaio)</td>
+                    <td>Condizioni lavorative e stabilità occupazionale<span class="citation">8</span></td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class="trend-name">Dossieropoli</div>
-                        <div class="trend-hashtag">Bellavia vs Varisco</div>
-                    </td>
-                    <td class="trend-content">Inchiesta Procura Milano: furto 900GB di file riservati (1M+ documenti) da studio Gian Gaetano Bellavia (consulente procure/Report). Rinvio a giudizio Valentina Varisco per accesso abusivo. Dibattito diviso: "maxi-dossieraggio" vs "deposito tecnico legittimo". Vulnerabilità cybersecurity istituzionale.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-indignato">Indignato</span>
-                        <span class="sentiment-tag sentiment-critico">Critico</span>
-                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Altissima</span>
-                        <div class="relevance-bar relevance-altissima">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
+                    <td class="highlight-cell">Scuola e Istruzione</td>
+                    <td>Ministero dell'Istruzione, Personale ATA, Docenti</td>
+                    <td>9 e 10 gennaio</td>
+                    <td>Contrasto al precariato, potenziamento organici, risorse mense<span class="citation">8</span></td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">Trasporto Locale (LPT)</td>
+                    <td>EAV (Napoli), TUA (Abruzzo), Bolzano, Venezia/Treviso</td>
+                    <td>Stop locali tra l'8 e il 10 gennaio</td>
+                    <td>Adeguamento retribuzioni al costo della vita<span class="citation">8</span></td>
                 </tr>
             </tbody>
         </table>
+
+        <p>La mobilitazione ha generato una polarizzazione significativa. Da un lato, i sindacati e i lavoratori hanno utilizzato le piattaforme digitali per sensibilizzare l'opinione pubblica sulla necessità di adeguare i salari all'inflazione e di migliorare la sicurezza in settori come quello ferroviario, dove i turni sono descritti come "eccessivamente logoranti"<span class="citation">9</span>. Dall'altro, l'utenza di X ha espresso frustrazione per il tempismo della protesta, coincidente con la ripresa delle attività post-festività e il ritorno a scuola, creando "giornate nere" per pendolari e viaggiatori<span class="citation">10</span>.</p>
+
+        <p>Un elemento di interesse sociologico è la percezione del diritto di sciopero in Italia. Nonostante i disagi, una parte consistente della popolazione (<strong>53%</strong>) si dichiara contraria a limitazioni del diritto di astenersi dal lavoro, suggerendo che la solidarietà verso le classi lavoratrici rimanga un valore radicato, pur in un contesto di crescente tensione per la qualità dei servizi pubblici<span class="citation">12</span>. La conversazione su X ha evidenziato anche le disparità regionali nel servizio: mentre in Umbria la mobilitazione del trasporto pubblico non ha causato disagi estremi, in grandi centri come Napoli e Milano il rischio di blocco totale è stato percepito come un'urgenza di primo piano<span class="citation">8</span>.</p>
     </div>
 </div>
 
-<!-- SEZIONE 3: GEOPOLITICA -->
+<!-- SEZIONE 4: DOSSIEROPOLI -->
 <div class="section-header">
-    <span class="section-number">03</span>
-    <h2 class="section-title">Geopolitica</h2>
-    <p class="section-subtitle">Tensioni transatlantiche e strategia artica</p>
+    <span class="section-number">04</span>
+    <h2 class="section-title">Dossieropoli</h2>
+    <p class="section-subtitle">L'integrità del sistema giudiziario-informativo</p>
+</div>
+
+<div class="category-card card-politica">
+    <div class="card-header">
+        <span class="card-title">🔒 Caso Bellavia vs Varisco</span>
+        <span class="card-badge">900GB • 1M+ file rubati</span>
+    </div>
+    <div class="card-body">
+        <p>L'inchiesta denominata "Dossieropoli" rappresenta uno dei temi più complessi e divisivi presenti su X il 10 gennaio 2026. Al centro della vicenda vi è il furto di dati sensibili dallo studio del commercialista <strong>Gian Gaetano Bellavia</strong>, noto consulente di diverse procure italiane e della trasmissione d'inchiesta "Report"<span class="citation">13</span>.</p>
+
+        <p>L'inchiesta, coordinata dalla Procura di Milano, ha portato al rinvio a giudizio di <strong>Valentina Varisco</strong>, ex collaboratrice di Bellavia, accusata di accesso abusivo a sistema informatico<span class="citation">13</span>. I dati sottratti ammontano a circa <strong>900 gigabyte</strong>, comprendendo oltre un milione di file riservati che includono documenti di clienti dello studio e atti relativi a indagini giudiziarie di cui Bellavia si era occupato come consulente tecnico per i pubblici ministeri<span class="citation">13</span>.</p>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 2rem 0 1rem; color: var(--oro-miele);">I Protagonisti del Dibattito</h3>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Protagonista</th>
+                    <th>Ruolo</th>
+                    <th>Posizione nel Dibattito</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="highlight-cell">Gian Gaetano Bellavia</td>
+                    <td>Consulente Procure / Report</td>
+                    <td>Difende la legittimità del suo archivio come deposito di atti per i PM<span class="citation">16</span></td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">Valentina Varisco</td>
+                    <td>Ex Collaboratrice</td>
+                    <td>Accusata di aver rubato file per usarli in società di investigazione<span class="citation">15</span></td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">Sigfrido Ranucci</td>
+                    <td>Conduttore di Report</td>
+                    <td>Denuncia un "attacco infame" volto a colpire il giornalismo d'inchiesta<span class="citation">17</span></td>
+                </tr>
+                <tr>
+                    <td class="highlight-cell">Gianluigi Nuzzi</td>
+                    <td>Giornalista</td>
+                    <td>In tendenza come figura di riferimento nel dibattito sulla trasparenza<span class="citation">1</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Il dibattito su X è fortemente influenzato dall'appartenenza politica e editoriale delle fonti. Testate come <em>Il Giornale</em> pongono l'accento sul rischio di un "maxi-dossieraggio" e sulla presenza di un "papello" di 36 pagine contenente nomi di magistrati e figure istituzionali che sarebbero stati oggetto di spionaggio<span class="citation">18</span>. Al contrario, testate come <em>Il Fatto Quotidiano</em> sostengono che non esista alcun documento detenuto illegalmente e che l'archivio di Bellavia sia semplicemente un deposito di elaborati tecnici realizzati per la magistratura<span class="citation">16</span>.</p>
+
+        <p style="background: rgba(196,58,49,0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--rosso-tensione); margin-top: 2rem;"><strong>⚠️ Implicazione Sistemica:</strong> L'implicazione di terzo ordine di questa vicenda riguarda la vulnerabilità strutturale delle informazioni detenute dallo Stato. Come sottolineato dall'esperto di sicurezza Giuliano Tavaroli, il caso Bellavia dimostra che le istituzioni italiane faticano a difendere i dati sensibili, trasformando archivi professionali in potenziali armi di ricatto o strumenti di influenza politica<span class="citation">18</span>. Per una piattaforma di opinione, il tema non è solo la colpevolezza dei singoli, ma la necessità di una riforma profonda della cybersecurity nelle collaborazioni tra giustizia e consulenti esterni.</p>
+    </div>
+</div>
+
+<!-- SEZIONE 5: GEOPOLITICA ARTICO -->
+<div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Geopolitica dell'Artico</h2>
+    <p class="section-subtitle">Il caso Groenlandia e la strategia di Meloni</p>
 </div>
 
 <div class="category-card card-geopolitica">
     <div class="card-header">
-        <span class="card-title">🌐 Caso Groenlandia & Artico</span>
-        <span class="card-badge">4 trend internazionali</span>
+        <span class="card-title">🌐 Caso Groenlandia & Strategia Artica</span>
+        <span class="card-badge">Italia vs Trump</span>
     </div>
     <div class="card-body">
-        <table class="trend-table">
-            <thead>
-                <tr>
-                    <th>Trend</th>
-                    <th>Sintesi</th>
-                    <th>Sentiment</th>
-                    <th>Rilevanza</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="trend-name">#DigitalBlackoutIran</div>
-                        <div class="trend-hashtag">658.300 tweet globali • 15+ ore</div>
-                    </td>
-                    <td class="trend-content">Trend globale su blackout digitale in Iran. Rilevanza per utenza italiana come indicatore di tensioni geopolitiche in Medio Oriente e questioni di diritti umani/censura digitale.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
-                        <span class="sentiment-tag sentiment-critico">Critico</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Media-Alta</span>
-                        <div class="relevance-bar relevance-media-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="trend-name">Mercosur</div>
-                        <div class="trend-hashtag">285.400 tweet globali • 8+ ore</div>
-                    </td>
-                    <td class="trend-content">Discussioni sull'accordo commerciale UE-Mercosur. Implicazioni economiche internazionali per commercio estero italiano (Italia 14° partner globale per export).</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-strategico">Strategico</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Media</span>
-                        <div class="relevance-bar relevance-media">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="trend-name">Starlink</div>
-                        <div class="trend-hashtag">247.400 tweet globali • 6+ ore</div>
-                    </td>
-                    <td class="trend-content">Tecnologia/connettività satellitare. Possibile collegamento con discussioni su sovranità digitale e infrastrutture critiche nel contesto del caso Dossieropoli.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-pragmatico">Tecnico</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Media</span>
-                        <div class="relevance-bar relevance-media">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="trend-name">Groenlandia - Strategia Artica IT</div>
-                        <div class="trend-hashtag">Meloni vs Trump</div>
-                    </td>
-                    <td class="trend-content">Meloni dichiara improbabile azione militare USA per controllo Groenlandia (non condividerebbe). Annuncio Strategia Italiana Artico (Farnesina, fine gennaio 2026) per preservare zona di pace e rafforzare NATO. Preoccupazione "neo-colonialismo" USA (accordo Cofa bypassando Danimarca).</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-strategico">Strategico</span>
-                        <span class="sentiment-tag sentiment-preoccupato">Preoccupato</span>
-                        <span class="sentiment-tag sentiment-determinato">Determinato</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Altissima</span>
-                        <div class="relevance-bar relevance-altissima">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <p>Le dinamiche internazionali hanno trovato un punto di caduta significativo nelle dichiarazioni della Premier <strong>Giorgia Meloni</strong> durante la conferenza stampa di inizio anno del 9 gennaio, i cui echi dominano i trend politici del giorno successivo<span class="citation">20</span>. Il tema centrale è stato il rapporto con la nuova amministrazione Trump, in particolare riguardo alle mire americane sulla Groenlandia.</p>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 2rem 0 1rem; color: var(--oro-miele);">Tra Diplomazia e Assertività Strategica</h3>
+
+        <p>Meloni ha assunto una posizione di <strong>cautela critica</strong>, dichiarando di non ritenere probabile un'azione militare statunitense per il controllo dell'isola danese, un'ipotesi che "chiaramente non condividerebbe" e che non converrebbe agli interessi di Washington<span class="citation">21</span>. Tuttavia, la Premier ha riconosciuto l'importanza strategica dell'Artico, sottolineando come gli Stati Uniti stiano ponendo l'attenzione su quest'area con metodi "molto assertivi"<span class="citation">21</span>.</p>
+
+        <p>La risposta italiana non si limita alla diplomazia verbale. Meloni ha annunciato che entro la fine di gennaio 2026 la Farnesina presenterà una <strong>"Strategia Italiana sull'Artico"</strong>, finalizzata a:</p>
+
+        <ul>
+            <li>Preservare l'area come <strong>zona di pace</strong></li>
+            <li>Rafforzare la presenza della <strong>NATO</strong> nell'area</li>
+            <li>Bilanciare le pretese unilaterali con un approccio <strong>multilaterale</strong><span class="citation">21</span></li>
+        </ul>
+
+        <p>La conversazione su X riflette una preoccupazione crescente per il <strong>"neo-colonialismo" strategico</strong>. Mentre gli Stati Uniti, attraverso figure come Stephen Miller, mettono in dubbio la sovranità danese definendo la Groenlandia una possibile "colonia" che dovrebbe far parte degli USA per motivi di sicurezza nazionale, l'opinione pubblica italiana si interroga sul ruolo dell'Europa in questa nuova contesa polare<span class="citation">24</span>. L'accordo di "Libera Associazione" (Cofa) proposto da Washington alla Groenlandia, bypassando Copenaghen, è visto come un precedente pericoloso per la stabilità delle alleanze occidentali<span class="citation">24</span>.</p>
+
+        <p style="background: rgba(26,54,93,0.2); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--azzurro-ghiaccio); margin-top: 2rem;"><strong>🎯 Opportunità Editoriale:</strong> Questo scenario offre un'eccezionale opportunità editoriale per analizzare come l'Italia, nazione mediterranea, stia cercando di ridefinire il proprio perimetro di influenza proiettandosi verso il Polo Nord, in una sintesi tra fedeltà atlantica e difesa dell'integrità dei partner europei.</p>
     </div>
 </div>
 
-<!-- SEZIONE 4: ECONOMIA E FINANZA -->
+<!-- SEZIONE 6: ECONOMIA E MANOVRA 2026 -->
 <div class="section-header">
-    <span class="section-number">04</span>
-    <h2 class="section-title">Economia e Finanza</h2>
-    <p class="section-subtitle">Manovra 2026 e dinamiche macroeconomiche</p>
+    <span class="section-number">06</span>
+    <h2 class="section-title">Macroeconomia e Manovra 2026</h2>
+    <p class="section-subtitle">La realtà del portafoglio nazionale</p>
 </div>
 
 <div class="category-card card-economia">
     <div class="card-header">
         <span class="card-title">💰 Legge di Bilancio & PIL</span>
-        <span class="card-badge">7 misure cardine</span>
+        <span class="card-badge">+6,4% PIL 2019-2025</span>
     </div>
     <div class="card-body">
-        <table class="trend-table">
+        <p>Oltre ai grandi temi di cronaca, X funge da aggregatore per l'analisi della situazione economica del paese, influenzata sia dai dati di crescita regionale che dai dettagli della Legge di Bilancio 2026.</p>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 2rem 0 1rem; color: var(--oro-miele);">Indicatori di Crescita e Commercio Estero</h3>
+
+        <p>I dati del commercio estero e del PIL reale mostrano un'Italia <strong>resiliente ma frammentata</strong>. Tra il 2019 e il 2025, l'Italia ha registrato un aumento del PIL reale del <strong>6,4%</strong>, superando la Francia (+5%) e la Germania (+0,2%), pur restando dietro la Spagna (+10%)<span class="citation">26</span>. Tuttavia, all'interno del paese, il motore economico del Nord mostra segni di rallentamento rispetto al Sud: se il Mezzogiorno traina la crescita, regioni storicamente forti come il Veneto e il Trentino-Alto Adige si attestano sul +5,1%, mentre il Friuli Venezia Giulia segna un modesto +1,9%<span class="citation">26</span>.</p>
+
+        <p>Nel panorama delle esportazioni globali, l'Italia mantiene una posizione di rilievo, classificandosi come il <strong>14° partner mondiale</strong> per esportazioni complessive e il <strong>13° per surplus commerciale</strong>, evidenziando la forza del Made in Italy nonostante le tensioni logistiche globali<span class="citation">27</span>.</p>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 2rem 0 1rem; color: var(--oro-miele);">Le Misure Cardine della Legge di Bilancio 2026</h3>
+
+        <table class="data-table">
             <thead>
                 <tr>
                     <th>Misura</th>
-                    <th>Dettagli</th>
-                    <th>Sentiment</th>
-                    <th>Rilevanza</th>
+                    <th>Dettagli Tecnici e Costi</th>
+                    <th>Obiettivi Sociali</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>
-                        <div class="trend-name">Revisione IRPEF</div>
-                        <div class="trend-hashtag">Ceto medio</div>
-                    </td>
-                    <td class="trend-content">Taglio seconda aliquota dal 35% al 33% per redditi 28-50k€. Obiettivo: sostegno ceto medio e riduzione pressione fiscale.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-entusiasta">Favorevole</span>
-                        <span class="sentiment-tag sentiment-pragmatico">Pragmatico</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Alta</span>
-                        <div class="relevance-bar relevance-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
+                    <td class="highlight-cell">Revisione IRPEF</td>
+                    <td>Taglio della seconda aliquota dal 35% al 33% per redditi tra 28k e 50k €</td>
+                    <td>Sostegno al ceto medio e riduzione della pressione fiscale<span class="citation">28</span></td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class="trend-name">Fondo Sanitario Nazionale</div>
-                        <div class="trend-hashtag">+2.382 milioni €</div>
-                    </td>
-                    <td class="trend-content">Incremento 2.382M€ per 2026. Potenziamento sanità pubblica, contrasto liste d'attesa.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-entusiasta">Necessario</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Alta</span>
-                        <div class="relevance-bar relevance-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
+                    <td class="highlight-cell">Fondo Sanitario Nazionale</td>
+                    <td>Incremento di 2.382 milioni di euro per il 2026</td>
+                    <td>Potenziamento della sanità pubblica e contrasto alle liste d'attesa<span class="citation">28</span></td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class="trend-name">Tassazione Banche</div>
-                        <div class="trend-hashtag">305M€ dai profitti</div>
-                    </td>
-                    <td class="trend-content">Stretta deducibilità perdite (da 45% a 35%). Reperimento 305M€ nel 2026 da profitti bancari.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-critico">Critico</span>
-                        <span class="sentiment-tag sentiment-indignato">Contestato</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Media-Alta</span>
-                        <div class="relevance-bar relevance-media-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
+                    <td class="highlight-cell">Tassazione Banche</td>
+                    <td>Stretta sulla deducibilità delle perdite (da 45% a 35%)</td>
+                    <td>Reperimento di risorse (305 milioni nel 2026) dai profitti bancari<span class="citation">28</span></td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class="trend-name">Riserve Auree</div>
-                        <div class="trend-hashtag">Sovranità nazionale</div>
-                    </td>
-                    <td class="trend-content">Dichiarazione appartenenza oro Banca d'Italia al "popolo italiano". Affermazione simbolica sovranità nazionale. Implicazioni rapporti BCE/Trattato UE da analizzare.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-determinato">Sovranista</span>
-                        <span class="sentiment-tag sentiment-critico">Critico</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Alta</span>
-                        <div class="relevance-bar relevance-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
+                    <td class="highlight-cell">Riserve Auree</td>
+                    <td>Dichiarazione di appartenenza al "popolo italiano"</td>
+                    <td>Affermazione simbolica di sovranità nazionale<span class="citation">28</span></td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class="trend-name">Affitti Brevi</div>
-                        <div class="trend-hashtag">Cedolare secca</div>
-                    </td>
-                    <td class="trend-content">21% (1° immobile), 26% dal 2°; regime impresa dal 3°. Regolazione mercato immobiliare, contrasto overtourism.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-critico">Diviso</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Media-Alta</span>
-                        <div class="relevance-bar relevance-media-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
+                    <td class="highlight-cell">Affitti Brevi</td>
+                    <td>Cedolare secca 21% (1° immobile), 26% dal 2°; impresa dal 3°</td>
+                    <td>Regolazione del mercato immobiliare e contrasto all'overtourism<span class="citation">28</span></td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class="trend-name">PIL Italia 2019-2025</div>
-                        <div class="trend-hashtag">+6,4% vs +0,2% Germania</div>
-                    </td>
-                    <td class="trend-content">Crescita reale: ITA +6,4%, Francia +5%, Germania +0,2%, Spagna +10%. Mezzogiorno traina, Nord rallenta (Veneto/Trentino +5,1%, Friuli +1,9%). Italia 14° partner export globale, 13° surplus commerciale.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-entusiasta">Positivo</span>
-                        <span class="sentiment-tag sentiment-pragmatico">Cauto</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Alta</span>
-                        <div class="relevance-bar relevance-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
+                    <td class="highlight-cell">Tobin Tax</td>
+                    <td>Raddoppio delle aliquote sulle transazioni finanziarie</td>
+                    <td>Tassazione delle rendite finanziarie speculative<span class="citation">29</span></td>
                 </tr>
             </tbody>
         </table>
+
+        <p>Il dibattito su X riguardo alla manovra è polarizzato tra chi vede in queste misure un aiuto concreto alle famiglie — come il rifinanziamento della carta "Dedicata a te" per i beni di prima necessità — e chi critica la "stretta" su settori come quello bancario o l'aumento della pressione fiscale sulle transazioni finanziarie<span class="citation">28</span>.</p>
+
+        <p>Un punto di forte interesse editoriale è la questione delle <strong>riserve auree</strong>: la decisione di iscrivere in bilancio che l'oro della Banca d'Italia appartiene al popolo italiano è una mossa che parla direttamente alla base elettorale sovranista, ma che richiede un'analisi tecnica profonda sulle implicazioni nei rapporti con la BCE e il Trattato UE<span class="citation">28</span>.</p>
     </div>
 </div>
 
-<!-- SEZIONE 5: CULTURA E SPETTACOLO -->
+<!-- SEZIONE 7: CULTURA E TRAGEDIA CRANS-MONTANA -->
 <div class="section-header">
-    <span class="section-number">05</span>
+    <span class="section-number">07</span>
     <h2 class="section-title">Cultura e Spettacolo</h2>
-    <p class="section-subtitle">Second screen e cronaca internazionale</p>
+    <p class="section-subtitle">L'eco della tragedia di Crans-Montana</p>
 </div>
 
 <div class="category-card card-intrattenimento">
     <div class="card-header">
-        <span class="card-title">📺 TV & Tragedia Crans-Montana</span>
-        <span class="card-badge">3 trend entertainment</span>
+        <span class="card-title">📺 Second Screen & Tragedia</span>
+        <span class="card-badge">40 morti • 6 italiani</span>
     </div>
     <div class="card-body">
-        <table class="trend-table">
-            <thead>
-                <tr>
-                    <th>Trend</th>
-                    <th>Sintesi</th>
-                    <th>Sentiment</th>
-                    <th>Rilevanza</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="trend-name">#QuartoGrado</div>
-                        <div class="trend-hashtag">&lt;10.000 tweet • 11+ ore</div>
-                    </td>
-                    <td class="trend-content">Fenomeno "second screen": la televisione generalista continua a dettare l'agenda delle conversazioni serali/notturne, estendendo influenza fino al mattino successivo. Persistenza dell'intrattenimento investigativo.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-entusiasta">Coinvolto</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Media</span>
-                        <div class="relevance-bar relevance-media">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="trend-name">#TalieQuali</div>
-                        <div class="trend-hashtag">&lt;10.000 tweet • 11+ ore • Rai 1</div>
-                    </td>
-                    <td class="trend-content">Entertainment Rai 1. Conferma del fenomeno second screen con longevità 11+ ore. Dimostrazione di come la TV generalista mantenga capacità di generare conversazioni digitali prolungate.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-entusiasta">Divertito</span>
-                        <span class="sentiment-tag sentiment-ironico">Ironico</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Media</span>
-                        <div class="relevance-bar relevance-media">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="trend-name">Tragedia Crans-Montana</div>
-                        <div class="trend-hashtag">40 morti, 6 italiani</div>
-                    </td>
-                    <td class="trend-content">Rogo bar "Le Constellation" (Svizzera): 40 morti, 116 feriti. Interrogatori proprietari Moretti. Video virale "cuore sulla neve" come elaborazione lutto collettivo. Indignazione per uscite sicurezza chiuse/nascoste. Questionamento sicurezza locali pubblici.</td>
-                    <td>
-                        <span class="sentiment-tag sentiment-indignato">Indignato</span>
-                        <span class="sentiment-tag sentiment-preoccupato">Dolente</span>
-                    </td>
-                    <td>
-                        <span class="relevance-label">Alta</span>
-                        <div class="relevance-bar relevance-alta">
-                            <div class="relevance-fill"></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <p>Nel settore dell'intrattenimento, i trend di X per il 10 gennaio 2026 mostrano una commistione tra la leggerezza del weekend e la persistenza di notizie tragiche che hanno scosso l'opinione pubblica all'inizio dell'anno.</p>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 2rem 0 1rem; color: var(--oro-miele);">La Tragedia di Crans-Montana: Sviluppi Giudiziari e Virali</h3>
+
+        <p>A dieci giorni dal rogo del bar "Le Constellation" a Crans-Montana (Svizzera), che ha causato <strong>40 morti e 116 feriti</strong>, l'attenzione rimane alta a causa dei primi interrogatori dei proprietari Jacques e Jessica Moretti<span class="citation">30</span>. Il bilancio definitivo ha confermato la morte di 6 giovani italiani, tra cui il sedicenne Giovanni Tamburi<span class="citation">30</span>.</p>
+
+        <p>Su X, il video del <strong>"cuore gigante sulla neve"</strong> formato dagli sciatori in segno di lutto è diventato un contenuto virale, agendo come catalizzatore per un sentiment di "dolore collettivo"<span class="citation">34</span>. Questo fenomeno dimostra come la piattaforma venga utilizzata non solo per l'informazione cruda, ma per l'elaborazione del lutto attraverso simboli visivi condivisi. Le discussioni si sono spostate anche sulla sicurezza dei locali pubblici: le rivelazioni secondo cui le uscite di sicurezza erano chiuse a chiave o nascoste hanno scatenato ondate di indignazione digitale<span class="citation">30</span>.</p>
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 2rem 0 1rem; color: var(--oro-miele);">Tendenze di Costume e Lifestyle</h3>
+
+        <p>Non mancano però i trend legati al tempo libero e alla moda. Il video "Italy's Big Street Trends 2026", girato nelle vie di Milano durante il periodo post-festivo, ha catturato l'attenzione di chi cerca ispirazione nello stile "Sophisticated Italian"<span class="citation">35</span>. Hashtag legati al benessere, come #FitLife o #HealthyLiving, mostrano come gennaio rimanga il mese dei propositi per la salute, mentre il trend #ReneeNicoleGood suggerisce l'emergere di nuove figure di influencer internazionali che penetrano nel mercato italiano<span class="citation">1</span>.</p>
     </div>
 </div>
 
-<!-- INSIGHT SOCIOLOGICI -->
+<!-- ROADMAP EDITORIALE -->
 <section class="insight-section">
-    <h3 class="insight-title">💡 Insight Sociologici del 10 Gennaio 2026</h3>
+    <h3 class="insight-title">📝 Roadmap Editoriale per Blog di Opinione</h3>
+    <p style="opacity: 0.9; margin-bottom: 2rem;">Sulla base dell'analisi dei trend di X del 10 gennaio 2026, si identificano quattro direttrici editoriali primarie per un blog di approfondimento che miri a unire attualità e analisi critica.</p>
+
     <div class="insight-content">
         <div class="insight-block">
-            <h4>1. Sicurezza Nazionale Asimmetrica: Faglie Fisiche vs Digitali</h4>
-            <p>Il paradosso dell'Italia emerge chiaramente: eccellenza nella gestione dell'emergenza fisica (sisma nello Ionio senza danni grazie a prevenzione e ipocentro profondo) ma fallimento clamoroso nella protezione dell'infrastruttura informativa (furto 900GB file riservati nel caso Dossieropoli). Questo svela una vulnerabilità sistemica: investimenti insufficienti in cybersecurity istituzionale e cultura di protezione dati. La necessità di riforma profonda nella gestione dei consulenti esterni dello Stato è urgente.</p>
+            <h4>1. La Sicurezza Nazionale tra Faglie Fisiche e Digitali</h4>
+            <p>L'editoriale di apertura potrebbe collegare il terremoto nello Ionio con l'inchiesta Dossieropoli. Il tema portante sarebbe la "vulnerabilità dell'infrastruttura Italia": siamo un paese che sa gestire l'emergenza fisica (nessun danno dal sisma grazie alla prevenzione e alla fortuna) ma fallisce clamorosamente nella gestione dell'infrastruttura informativa (il furto di un milione di file riservati). Questa connessione permetterebbe di discutere di investimenti in tecnologia e di cultura della protezione dei dati.</p>
         </div>
+
         <div class="insight-block">
-            <h4>2. X come Sistema di Allerta Partecipata</h4>
-            <p>Il terremoto dimostra che X opera in Italia secondo un modello di "allerta partecipata": la validazione sociale dell'evento precede la comunicazione istituzionale. Migliaia di utenti interagiscono simultaneamente nei minuti post-scossa, creando un sensore informale. Tuttavia, il vuoto informativo dei primi 15 minuti rischia di essere colmato da disinformazione. Necessaria presenza istituzionale ancora più capillare e reattiva sulle piattaforme social.</p>
+            <h4>2. Geopolitica dell'Artico: Il Risveglio del Mediterraneo</h4>
+            <p>Un approfondimento sulla Strategia Italiana sull'Artico annunciata da Meloni. L'articolo dovrebbe spiegare ai lettori perché un'isola a migliaia di chilometri di distanza (la Groenlandia) sia fondamentale per l'interesse nazionale italiano, collegando la questione delle materie prime critiche alla stabilità della NATO e alla risposta europea alle "mire neocoloniali" di Trump.</p>
         </div>
+
         <div class="insight-block">
-            <h4>3. Sciopero nell'Era Digitale: Diritto vs Servizio</h4>
-            <p>La mobilitazione 9-10 gennaio rivela polarizzazione profonda. Nonostante disagi (blocco trasporti/scuola post-festività), il 53% della popolazione si oppone a limitazioni del diritto di sciopero, segnalando solidarietà radicata verso classi lavoratrici. Paradosso: Italia cresce PIL più della Germania (+6,4% vs +0,2% 2019-2025) ma non garantisce servizi pubblici efficienti o stipendi competitivi. Necessità di nuovo patto sociale tra sostenibilità bilancio e qualità lavoro pubblico.</p>
+            <h4>3. Il Lavoro nel 2026: Verso un Nuovo Patto Sociale?</h4>
+            <p>Lo sciopero del 9-10 gennaio offre lo spunto per una riflessione sul futuro del lavoro pubblico. Mentre la Manovra 2026 cerca di sostenere i redditi bassi con il taglio IRPEF, settori chiave come trasporti e scuola denunciano turni logoranti e precariato. L'analisi dovrebbe concentrarsi sul paradosso di un paese che cresce più della Germania ma che non riesce a garantire servizi pubblici efficienti o stipendi competitivi per i suoi funzionari.</p>
         </div>
+
         <div class="insight-block">
-            <h4>4. Geopolitica dell'Artico: Mediterraneo Proiettato al Polo Nord</h4>
-            <p>L'annuncio della Strategia Italiana sull'Artico (fine gennaio 2026) segna un cambio paradigmatico: l'Italia, nazione mediterranea, ridefinisce il perimetro di influenza proiettandosi verso il Polo Nord. Equilibrio delicato tra fedeltà atlantica (alleanza USA/NATO) e difesa integrità partner europei (Danimarca). Preoccupazione per "neo-colonialismo strategico" USA (accordo Cofa con Groenlandia bypassando Copenaghen). Materie prime critiche e stabilità NATO al centro dell'interesse nazionale italiano.</p>
-        </div>
-        <div class="insight-block">
-            <h4>5. Etica del Controllo: Doppio Standard Stato</h4>
-            <p>Tensione filosofica: lo Stato cerca di controllare/tassare affitti brevi (cedolare 26% dal 2° immobile) per preservare identità città, ma perde controllo sui propri dossier segreti (Dossieropoli). Il dibattito esplora il paradosso tra necessità di regolamentazione (overtourism, speculazione immobiliare) e fragilità sistemi di sorveglianza pubblica/privata. Questionamento: come può uno Stato regolare i cittadini se non riesce a proteggere le proprie informazioni sensibili?</p>
-        </div>
-        <div class="insight-block">
-            <h4>6. Second Screen: TV Generalista Resiste al Digitale</h4>
-            <p>La persistenza di #QuartoGrado e #TalieQuali per 11+ ore dimostra che la televisione generalista mantiene capacità di dettare l'agenda conversazionale, estendendo l'influenza fino al mattino successivo. Fenomeno second screen confermato: mentre consumano contenuti TV, gli utenti commentano simultaneamente su X, creando sovrapposizione spazio fisico (salotto) e digitale (timeline). La TV non è morta, ma si è trasformata in esperienza ibrida.</p>
+            <h4>4. L'Etica del Controllo: Dagli Affitti Brevi al Dossieraggio</h4>
+            <p>Una riflessione filosofica e politica sul concetto di "controllo". Da un lato, lo Stato cerca di controllare e tassare il mercato degli affitti brevi (cedolare al 26% dal secondo immobile) per preservare l'identità delle città; dall'altro, lo Stato perde il controllo sui propri dossier segreti. Il post potrebbe esplorare la tensione tra la necessità di regolamentazione e la fragilità dei sistemi di sorveglianza pubblica e privata.</p>
         </div>
     </div>
+
+    <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(248,246,242,0.1); opacity: 0.9;"><strong>Conclusione:</strong> La giornata del 10 gennaio 2026 restituisce l'immagine di un'Italia complessa, dove la vitalità economica (crescita del PIL al Sud, successo delle esportazioni) convive con fragilità sistemiche e tensioni sociali irrisolte. X si conferma lo strumento privilegiato per catturare questa complessità, offrendo al contempo i dati per una narrazione che, se correttamente interpretata, può guidare l'opinione pubblica verso una comprensione più profonda dei mutamenti in atto.</p>
 </section>
 
-<!-- SEZIONE METODOLOGIA -->
-<div class="section-header">
-    <span class="section-number">06</span>
-    <h2 class="section-title">Metodologia & Roadmap Editoriale</h2>
-    <p class="section-subtitle">Approccio analitico e strategie future</p>
-</div>
+<!-- BIBLIOGRAFIA -->
+<section class="bibliografia-section">
+    <h3>📚 Bibliografia</h3>
 
-<div class="category-card card-sentiment">
-    <div class="card-header">
-        <span class="card-title">🔬 Approccio Metodologico</span>
-        <span class="card-badge">Analisi qualitativa</span>
-    </div>
-    <div class="card-body" style="padding: 2.5rem;">
-        <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 1rem; color: var(--oro-miele);">Fonti e Raccolta Dati</h4>
-        <p style="margin-bottom: 2rem; opacity: 0.85; line-height: 1.8;">I dati di questo report provengono dall'analisi manuale del panorama digitale italiano su X nella giornata del 10 gennaio 2026. Le tendenze sono state categorizzate secondo le 16 categorie del blog, utilizzando keyword matching semantico e validazione contestuale. I volumi conversazionali sono stati stimati attraverso l'analisi dei trending topics e la persistenza temporale degli hashtag.</p>
+    <div class="bib-item" data-num="[1]">Italy • Now • Twitter Trending Hashtags and Topics - getdaytrends, accesso eseguito il giorno gennaio 10, 2026, <a href="https://getdaytrends.com/italy/" target="_blank">https://getdaytrends.com/italy/</a></div>
 
-        <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 1rem; color: var(--oro-miele);">Roadmap Editoriale Suggerita</h4>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--rosso-tensione);">
-                <strong style="display: block; margin-bottom: 0.5rem;">🔒 Sicurezza Nazionale</strong>
-                <p style="font-size: 0.9rem; opacity: 0.8;">Editoriale su "vulnerabilità infrastruttura Italia": eccellenza gestione emergenze fisiche vs fallimento protezione dati (Dossieropoli). Investimenti tecnologia e cultura protezione dati.</p>
-            </div>
-            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--blu-profondo);">
-                <strong style="display: block; margin-bottom: 0.5rem;">❄️ Geopolitica Artico</strong>
-                <p style="font-size: 0.9rem; opacity: 0.8;">Approfondimento Strategia Italiana Artico: perché la Groenlandia è fondamentale per l'interesse nazionale italiano. Materie prime critiche, stabilità NATO, risposta UE a Trump.</p>
-            </div>
-            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--oro-miele);">
-                <strong style="display: block; margin-bottom: 0.5rem;">⚙️ Futuro del Lavoro</strong>
-                <p style="font-size: 0.9rem; opacity: 0.8;">Riflessione su sciopero 9-10 gennaio: paradosso di un paese che cresce più della Germania ma non garantisce servizi pubblici efficienti. Verso un nuovo patto sociale?</p>
-            </div>
-            <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--verde-oliva);">
-                <strong style="display: block; margin-bottom: 0.5rem;">🎯 Etica del Controllo</strong>
-                <p style="font-size: 0.9rem; opacity: 0.8;">Analisi filosofica: Stato controlla/tassa affitti brevi ma perde controllo dossier segreti. Tensione tra necessità regolamentazione e fragilità sorveglianza pubblica/privata.</p>
-            </div>
-        </div>
+    <div class="bib-item" data-num="[2]">Italy — X (Twitter) trending topics and hashtags today | trends24.in, accesso eseguito il giorno gennaio 10, 2026, <a href="https://trends24.in/italy/" target="_blank">https://trends24.in/italy/</a></div>
 
-        <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 2rem 0 1rem; color: var(--oro-miele);">Limitazioni</h4>
-        <ul style="margin-left: 1.5rem; opacity: 0.8; line-height: 1.8;">
-            <li>Volumi tweet stimati (non dati API ufficiali)</li>
-            <li>Sentiment analysis qualitativa (non algoritmica)</li>
-            <li>Categorizzazione manuale (soggetta a interpretazione)</li>
-            <li>Snapshot temporale (mattina 10 gennaio 2026)</li>
-            <li>Focus su trending topics italiani (esclude conversazioni non-virali)</li>
-        </ul>
-    </div>
-</div>
+    <div class="bib-item" data-num="[3]">Scossa di terremoto magnitudo 5.1 avvertita a Reggio Calabria, accesso eseguito il giorno gennaio 10, 2026, <a href="https://tg24.sky.it/cronaca/2026/01/10/terremoto-calabria-oggi" target="_blank">https://tg24.sky.it/cronaca/2026/01/10/terremoto-calabria-oggi</a></div>
+
+    <div class="bib-item" data-num="[4]">Scossa di terremoto di magnitudo 5.1 in Calabria avvertita anche a Messina e Catania, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.gazzetta.it/attualita/10-01-2026/terremoto-in-calabria-10-gennaio-2026-forte-scossa-in-mare.shtml" target="_blank">https://www.gazzetta.it/attualita/10-01-2026/terremoto-in-calabria-10-gennaio-2026-forte-scossa-in-mare.shtml</a></div>
+
+    <div class="bib-item" data-num="[5]">Terremoto a Reggio Calabria: scossa di magnitudo di 5.1. Epicentro al largo della costa ionica, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.quotidiano.net/cronaca/terremoto-reggio-calabria-k0t3uwg0" target="_blank">https://www.quotidiano.net/cronaca/terremoto-reggio-calabria-k0t3uwg0</a></div>
+
+    <div class="bib-item" data-num="[6]">Terremoto in Calabria: scossa di magnitudo 5.1 all'alba, paura fino a Messina ma nessun danno segnalato, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.affaritaliani.it/cronache/terremoto-calabria-scossa-magnitudo-5-1-alba-paura-fino-messina-nessun-danno-segnalato-997664.html" target="_blank">https://www.affaritaliani.it/cronache/terremoto-calabria-scossa-magnitudo-5-1-alba-paura-fino-messina-nessun-danno-segnalato-997664.html</a></div>
+
+    <div class="bib-item" data-num="[7]">Forte scossa di terremoto al largo della Calabria: magnitudo 5,1. Avvertita anche a Messina, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.ilgiornale.it/news/nazionale/forte-scossa-terremoto-largo-calabria-magnitudo-51-avvertita-2593328.html" target="_blank">https://www.ilgiornale.it/news/nazionale/forte-scossa-terremoto-largo-calabria-magnitudo-51-avvertita-2593328.html</a></div>
+
+    <div class="bib-item" data-num="[8]">Scioperi il 9 e 10 gennaio 2026: Italia a rischio blocco - Torino Cronaca, accesso eseguito il giorno gennaio 10, 2026, <a href="https://torinocronaca.it/news/cronaca/591611/scioperi-il-9-e-10-gennaio-2026-italia-a-rischio-blocco.html" target="_blank">https://torinocronaca.it/news/cronaca/591611/scioperi-il-9-e-10-gennaio-2026-italia-a-rischio-blocco.html</a></div>
+
+    <div class="bib-item" data-num="[9]">Sciopero 9 e 10 gennaio 2026: stop a trasporti. Il 12 e 13 gennaio tocca alla scuola, accesso eseguito il giorno gennaio 10, 2026, <a href="https://agrpress.it/sciopero-9-e-10-gennaio-2026-stop-a-trasporti-e-scuola/" target="_blank">https://agrpress.it/sciopero-9-e-10-gennaio-2026-stop-a-trasporti-e-scuola/</a></div>
+
+    <div class="bib-item" data-num="[10]">Scioperi gennaio 2026, aerei e treni: 9 e 10 le giornate nere - Adnkronos, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.adnkronos.com/economia/scioperi-gennaio-2026-aerei-e-treni-9-e-10-le-giornate-nere_3aYG7M0bu0FwjwhUFRbjBm" target="_blank">https://www.adnkronos.com/economia/scioperi-gennaio-2026-aerei-e-treni-9-e-10-le-giornate-nere_3aYG7M0bu0FwjwhUFRbjBm</a></div>
+
+    <div class="bib-item" data-num="[11]">Sciopero di Trasporti e Scuole in Italia il 9 e 10 Gennaio: Dettagli, Contesto e Implicazioni - weareiowa.com, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.weareiowa.com/article/news/local/plea-agreement-reached-in-des-moines-murder-trial/524-3069d9d4-6f9b-4039-b884-1d2146bd744f" target="_blank">https://www.weareiowa.com/article/news/local/plea-agreement-reached-in-des-moines-murder-trial/524-3069d9d4-6f9b-4039-b884-1d2146bd744f</a></div>
+
+    <div class="bib-item" data-num="[12]">Sciopero 10 gennaio, pochi disagi per treni e trasporto pubblico locale - Sky TG24, accesso eseguito il giorno gennaio 10, 2026, <a href="https://tg24.sky.it/cronaca/2025/01/10/sciopero-oggi-10-gennaio-diretta" target="_blank">https://tg24.sky.it/cronaca/2025/01/10/sciopero-oggi-10-gennaio-diretta</a></div>
+
+    <div class="bib-item" data-num="[13]">Rubato un milione di file "ad alta sensibilità" al super consulente dei pm e di Report: ex collaboratrice a giudizio - Il Fatto Quotidiano, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.ilfattoquotidiano.it/2026/01/02/bellavia-furto-dati-sensibili-processo-news/8243304/" target="_blank">https://www.ilfattoquotidiano.it/2026/01/02/bellavia-furto-dati-sensibili-processo-news/8243304/</a></div>
+
+    <div class="bib-item" data-num="[14]">Un milione di file rubati allo studio di Gian Gaetano Bellavia - Gianni Barbacetto, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.giannibarbacetto.it/2026/01/09/un-milione-di-file-rubati-allo-studio-di-gian-gaetano-bellavia/" target="_blank">https://www.giannibarbacetto.it/2026/01/09/un-milione-di-file-rubati-allo-studio-di-gian-gaetano-bellavia/</a></div>
+
+    <div class="bib-item" data-num="[15]">Furto di dati a Giangaetano Bellavia: chi c'è nei file e chi è il commercialista di Report, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.policymakermag.it/italia/furto-di-dati-a-giangaetano-bellavia-chi-ce-erai-file-e-chi-e-il-commercialista-di-report/" target="_blank">https://www.policymakermag.it/italia/furto-di-dati-a-giangaetano-bellavia-chi-ce-erai-file-e-chi-e-il-commercialista-di-report/</a></div>
+
+    <div class="bib-item" data-num="[16]">Caso Bellavia: la bufala del "dossieraggio" (inesistente) per colpire Report, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.giannibarbacetto.it/2026/01/09/caso-bellavia-la-bufala-del-dossieraggio-inesistente-per-colpire-report/" target="_blank">https://www.giannibarbacetto.it/2026/01/09/caso-bellavia-la-bufala-del-dossieraggio-inesistente-per-colpire-report/</a></div>
+
+    <div class="bib-item" data-num="[17]">"Attacco infame". Ranucci in difesa di Bellavia sul caso Report - il Giornale, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.ilgiornale.it/news/cronaca-giudiziaria/attacco-infame-ranucci-difesa-bellavia-sul-caso-report-2593246.html" target="_blank">https://www.ilgiornale.it/news/cronaca-giudiziaria/attacco-infame-ranucci-difesa-bellavia-sul-caso-report-2593246.html</a></div>
+
+    <div class="bib-item" data-num="[18]">Magistratura: news, video, foto e ultime notizie - il Giornale, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.ilgiornale.it/sezioni/magistratura-167452.html" target="_blank">https://www.ilgiornale.it/sezioni/magistratura-167452.html</a></div>
+
+    <div class="bib-item" data-num="[19]">il Giornale - Ultime notizie su attualità, politica ed economia, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.ilgiornale.it/" target="_blank">https://www.ilgiornale.it/</a></div>
+
+    <div class="bib-item" data-num="[20]">La conferenza stampa di inizio anno di Giorgia Meloni, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.unionesarda.it/politica/la-conferenza-stampa-di-inizio-anno-di-giorgia-meloni-v5k0uub2" target="_blank">https://www.unionesarda.it/politica/la-conferenza-stampa-di-inizio-anno-di-giorgia-meloni-v5k0uub2</a></div>
+
+    <div class="bib-item" data-num="[21]">Meloni: "Trump non attaccherà Groenlandia, Ue parli con Russia" - Adnkronos, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.adnkronos.com/politica/meloni-trump-non-attacchera-groenlandia-ue-parli-con-russia_4pBBwdlwVpFsd4IhwlczVh" target="_blank">https://www.adnkronos.com/politica/meloni-trump-non-attacchera-groenlandia-ue-parli-con-russia_4pBBwdlwVpFsd4IhwlczVh</a></div>
+
+    <div class="bib-item" data-num="[22]">Meloni: "Non Credo a un'azione militare Usa in Groenlandia" – MegaQueenBet, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.weareiowa.com/article/news/local/plea-agreement-reached-in-des-moines-murder-trial/524-3069d9d4-6f9b-4039-b884-1d2146bd744f" target="_blank">https://www.weareiowa.com/article/news/local/plea-agreement-reached-in-des-moines-murder-trial/524-3069d9d4-6f9b-4039-b884-1d2146bd744f</a></div>
+
+    <div class="bib-item" data-num="[23]">Meloni: continuo a non credere in ipotesi militare Usa per controllo Groenlandia, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.borsaitaliana.it/borsa/notizie/radiocor/economia/dettaglio/meloni-continuo-a-non-credere-in-ipotesi-militare-usa-per-controllo-groenlandia-nRC_09012026_1141_319154595.html" target="_blank">https://www.borsaitaliana.it/borsa/notizie/radiocor/economia/dettaglio/meloni-continuo-a-non-credere-in-ipotesi-militare-usa-per-controllo-groenlandia-nRC_09012026_1141_319154595.html</a></div>
+
+    <div class="bib-item" data-num="[24]">Groenlandia, Europa a Trump: "Appartiene a suo popolo". Media: "Ecco il piano Usa", accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.adnkronos.com/internazionale/esteri/groenlandia-europa-risponde-a-trump_6rfoWtNJG3dFE88z5v31p9" target="_blank">https://www.adnkronos.com/internazionale/esteri/groenlandia-europa-risponde-a-trump_6rfoWtNJG3dFE88z5v31p9</a></div>
+
+    <div class="bib-item" data-num="[25]">In Groenlandia le reazioni ai commenti di Trump: "Inaccettabile nel mondo civilizzato", accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.lagazzettadelmezzogiorno.it/video/mondo-tv/1908120/in-groenlandia-le-reazioni-ai-commenti-di-trump-inaccettabile-nel-mondo-civilizzato.html" target="_blank">https://www.lagazzettadelmezzogiorno.it/video/mondo-tv/1908120/in-groenlandia-le-reazioni-ai-commenti-di-trump-inaccettabile-nel-mondo-civilizzato.html</a></div>
+
+    <div class="bib-item" data-num="[26]">Crescita del Pil per regioni italiane trainata dal Sud - Il Diario d'Italia, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.diarioditalia.it/economia/crescita-del-pil-per-regioni-italiane-trainata-dal-sud/" target="_blank">https://www.diarioditalia.it/economia/crescita-del-pil-per-regioni-italiane-trainata-dal-sud/</a></div>
+
+    <div class="bib-item" data-num="[27]">Top Trading Partners – Year-to-Date Total Trade, Exports, and Imports - U.S. Census Bureau, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.census.gov/foreign-trade/statistics/highlights/topyr.html" target="_blank">https://www.census.gov/foreign-trade/statistics/highlights/topyr.html</a></div>
+
+    <div class="bib-item" data-num="[28]">Legge di Bilancio 2026: riforma fiscale e misure per crescita e imprese | Confcommercio, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.confcommercio.it/-/manovra" target="_blank">https://www.confcommercio.it/-/manovra</a></div>
+
+    <div class="bib-item" data-num="[29]">Principali misure della legge di bilancio 2026 - MEF, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.mef.gov.it/focus/Principali-misure-della-legge-di-bilancio-2026/" target="_blank">https://www.mef.gov.it/focus/Principali-misure-della-legge-di-bilancio-2026/</a></div>
+
+    <div class="bib-item" data-num="[30]">Incendio di Crans-Montana del 2026 - Wikipedia, accesso eseguito il giorno gennaio 10, 2026, <a href="https://it.wikipedia.org/wiki/Incendio_di_Crans-Montana_del_2026" target="_blank">https://it.wikipedia.org/wiki/Incendio_di_Crans-Montana_del_2026</a></div>
+
+    <div class="bib-item" data-num="[31]">Strage Crans-Montana, chi sono i proprietari del bar Le Constellation, accesso eseguito il giorno gennaio 10, 2026, <a href="https://tg24.sky.it/mondo/2026/01/02/strage-svizzera-incendio-crans-montana-proprietari-le-constellation-chi-sono" target="_blank">https://tg24.sky.it/mondo/2026/01/02/strage-svizzera-incendio-crans-montana-proprietari-le-constellation-chi-sono</a></div>
+
+    <div class="bib-item" data-num="[32]">I proprietari del bar «Le Constellation» vengono ascoltati come sospettati - Corriere del Ticino, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.cdt.ch/news/i-proprietari-del-bar-le-constellation-vengono-ascoltati-come-sospettati-415409" target="_blank">https://www.cdt.ch/news/i-proprietari-del-bar-le-constellation-vengono-ascoltati-come-sospettati-415409</a></div>
+
+    <div class="bib-item" data-num="[33]">Esplosione a Crans-Montana, dalla dinamica dell'incendio alle vittime: cosa sappiamo, accesso eseguito il giorno gennaio 10, 2026, <a href="https://tg24.sky.it/mondo/2026/01/01/svizzera-morti-feriti-esplosione-cans-montana" target="_blank">https://tg24.sky.it/mondo/2026/01/01/svizzera-morti-feriti-esplosione-cans-montana</a></div>
+
+    <div class="bib-item" data-num="[34]">Social News: notizie virali dai Social | VirgilioNotizie, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.virgilio.it/notizie/social-news/" target="_blank">https://www.virgilio.it/notizie/social-news/</a></div>
+
+    <div class="bib-item" data-num="[35]">ITALY'S BIG STREET TRENDS 2026 JANUARY MILAN FASHION LOOKS | TIMELESS SHOPPING & HOTTEST OUTFITS - YouTube, accesso eseguito il giorno gennaio 10, 2026, <a href="https://www.youtube.com/watch?v=ilhrvWUfEuM" target="_blank">https://www.youtube.com/watch?v=ilhrvWUfEuM</a></div>
+
+    <div class="bib-item" data-num="[36]">The Best Hashtags for X (Twitter): Updated June 2025 - Podcastle.ai, accesso eseguito il giorno gennaio 10, 2026, <a href="https://podcastle.ai/blog/best-hashtags-for-twitter/" target="_blank">https://podcastle.ai/blog/best-hashtags-for-twitter/</a></div>
+</section>
 
 </main>
 
 <footer class="report-footer">
     <div class="footer-logo">Social Intelligence Report</div>
     <p class="footer-meta">Analisi generata il 10 Gennaio 2026 — Dati aggregati da X (Twitter) Italia</p>
-    <p class="footer-meta" style="margin-top: 0.5rem; opacity: 0.3;">Progetto Analisi_social — Categorizzazione editoriale su 16 tematiche del blog</p>
+    <p class="footer-meta" style="margin-top: 0.5rem; opacity: 0.3;">Progetto Analisi_social — Report sistemico con 36 fonti bibliografiche</p>
 </footer>
 
 </body>
