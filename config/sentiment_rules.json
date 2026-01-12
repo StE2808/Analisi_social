@@ -1,0 +1,121 @@
+{
+  "positive_words": [
+    "vittoria", "successo", "trionfo", "ottimo", "fantastico", "record",
+    "storico", "straordinario", "straordinaria", "conquista", "festa", "orgoglio",
+    "bravi", "brava", "bravo", "bene", "bellissimo", "bellissima", "meraviglioso",
+    "meravigliosa", "eccellente", "perfetto", "perfetta", "grandioso", "grandiosa",
+    "magnifico", "magnifica", "splendido", "splendida", "felice", "felicità",
+    "gioia", "gioioso", "gioisosa", "allegria", "allegro", "allegra", "amore",
+    "pace", "speranza", "progresso", "innovazione", "crescita", "miglioramento",
+    "positivo", "positiva", "favorevole", "vincente", "campione", "campionessa",
+    "top", "best", "mega", "super", "wow", "grazie", "complimenti", "applauso",
+    "applausi", "evviva", "bello", "bella", "giusto", "giusta", "giustizia",
+    "libertà", "diritti", "democratico", "democratica", "democrazia", "vittorioso",
+    "vittoriosa", "esaltante", "entusiasmo", "entusiasmante", "incredibile",
+    "eccezionale", "formidabile", "strepitoso", "strepitosa", "fenomenale",
+    "favoloso", "favolosa", "stupendo", "stupenda", "geniale", "brillante",
+    "forte", "fortissimo", "fortissima", "grande", "grandissimo", "grandissima",
+    "top", "numero uno", "campioni", "vincitori", "vincitore", "vincitrice"
+  ],
+
+  "negative_words": [
+    "scandalo", "scandaloso", "scandalosa", "tragedia", "tragico", "tragica",
+    "crisi", "disastro", "disastroso", "disastrosa", "fallimento", "fallito",
+    "fallita", "vergogna", "vergognoso", "vergognosa", "corruzione", "corrotto",
+    "corrotta", "morte", "morto", "morta", "protesta", "rabbia", "arrabbiato",
+    "arrabbiata", "paura", "panico", "emergenza", "problema", "problemi",
+    "difficoltà", "male", "brutto", "brutta", "pessimo", "pessima", "orribile",
+    "terribile", "drammatico", "drammatica", "grave", "gravissimo", "gravissima",
+    "critico", "critica", "preoccupante", "allarme", "allarmante", "rischio",
+    "rischioso", "rischiosa", "pericolo", "pericoloso", "pericolosa", "minaccia",
+    "violenza", "violento", "violenta", "guerra", "conflitto", "scontro",
+    "attacco", "bomba", "esplosione", "sparatoria", "omicidio", "assassinio",
+    "arresto", "arrestato", "arrestata", "condanna", "condannato", "condannata",
+    "colpa", "colpevole", "truffa", "truffatore", "truffatrice", "inganno",
+    "bugia", "falsità", "falso", "falsa", "ingiustizia", "ingiusto", "ingiusta",
+    "discriminazione", "odio", "razzismo", "razzista", "sfruttamento", "povertà",
+    "povero", "povera", "disoccupazione", "disoccupato", "disoccupata",
+    "licenziamento", "licenziato", "licenziata", "disperazione", "disperato",
+    "disperata", "tristezza", "triste", "dolore", "doloroso", "dolorosa",
+    "sofferenza", "lutto", "malattia", "malato", "malata", "contagio",
+    "pandemia", "epidemia", "catastrofe", "catastrofico", "catastrofica",
+    "crollo", "debacle", "rovina", "rovinato", "rovinata", "degrado", "declino"
+  ],
+
+  "intensifiers": [
+    "molto", "troppo", "incredibilmente", "assolutamente", "totalmente",
+    "completamente", "estremamente", "particolarmente", "davvero", "veramente",
+    "realmente", "enormemente", "immensamente", "straordinariamente",
+    "eccezionalmente", "oltremodo", "sommamente", "parecchio", "assai",
+    "proprio", "tanto", "talmente", "super", "iper", "ultra", "mega",
+    "extra", "stra", "arci", "iper"
+  ],
+
+  "negators": [
+    "non", "mai", "nessuno", "nessuna", "niente", "nulla", "senza",
+    "contro", "nega", "negativo", "negativa", "negazione", "zero",
+    "né", "neanche", "nemmeno", "neppure", "impossibile", "inesistente",
+    "no", "nope"
+  ],
+
+  "polarization_indicators": [
+    "scontro", "polemica", "polemico", "polemica", "divisione", "diviso",
+    "divisa", "destra", "sinistra", "contro", "battaglia", "guerra",
+    "schieramento", "schierato", "schierata", "opposizione", "maggioranza",
+    "partito", "fazione", "fronte", "alleanza", "alleato", "alleata",
+    "nemico", "nemica", "avversario", "avversaria", "lite", "litigio",
+    "dibattito", "disputa", "contrasto", "frattura", "rottura", "spaccatura",
+    "separazione", "divergenza", "conflitto", "confronto", "duello", "sfida",
+    "rivale", "polarizzazione", "polarizzato", "polarizzata", "ideologico",
+    "ideologica", "sinistra vs destra", "pro", "anti", "divisi"
+  ],
+
+  "irony_markers": [
+    "ovviamente", "certo", "certamente", "sicuramente", "come no", "eh già",
+    "figurati", "figuriamoci", "magari", "immagina", "davvero", "per carità",
+    "guarda un po", "ma va", "ma dai", "dai", "pensa te", "meno male",
+    "ci credo", "sì certo", "ma certo", "ah sì", "bella questa"
+  ],
+
+  "emoji_sentiment": {
+    "positive": [
+      "🎉", "❤️", "🔥", "👏", "💪", "🏆", "✨", "😍", "🥳", "🙌",
+      "💯", "⭐", "🌟", "😊", "😀", "🤗", "💖", "💕", "🎊", "🎈",
+      "👍", "🙏", "😁", "😄", "☺️", "😘", "💓", "💗", "💝", "🎁"
+    ],
+    "negative": [
+      "😡", "💔", "😢", "🤮", "💀", "🤡", "😤", "🚨", "😠", "😰",
+      "😱", "🤬", "👎", "💩", "⚠️", "🆘", "😭", "😞", "😔", "🙁",
+      "😩", "😫", "😖", "😣", "😵", "🤯", "☠️", "👿"
+    ],
+    "sarcastic": [
+      "🙃", "👀", "🤔", "😏", "🤷", "🙄", "😒", "🤨", "🫠", "🤪"
+    ]
+  },
+
+  "context_modifiers": {
+    "political_left": [
+      "meloni", "salvini", "berlusconi", "destra", "fascismo", "fascista",
+      "lega", "fdi", "fratelli d'italia", "forza italia"
+    ],
+    "political_right": [
+      "pd", "sinistra", "comunista", "rossi", "schlein", "conte",
+      "movimento 5 stelle", "m5s", "pd"
+    ]
+  },
+
+  "slang_social": {
+    "positive": [
+      "top", "gg", "based", "chad", "king", "queen", "boss", "legend",
+      "fire", "lit", "figo", "fichissimo", "forte", "grande", "spacca"
+    ],
+    "negative": [
+      "cringe", "trash", "fail", "flop", "vergogna", "imbarazzante",
+      "ridicolo", "patetico", "penoso", "scemo", "idiota", "buffone"
+    ],
+    "ironic": [
+      "lol", "lmao", "ahah", "ahahah", "muoio", "morto", "haha",
+      "ti prego", "basta", "help", "aiuto"
+    ]
+  }
+}
