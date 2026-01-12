@@ -1,0 +1,7 @@
+# Analisi Social - Python Dependencies
+
+# Template Engine
+jinja2>=3.1.0
+
+# YAML parsing (optional, fallback to basic parser)
+pyyaml>=6.0

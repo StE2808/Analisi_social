@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trend X Italia - 12 January 2026</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0e27;
+            --bg-card: #1a1f3a;
+            --bg-card-hover: #252b4a;
+            --accent-primary: #667eea;
+            --accent-secondary: #764ba2;
+            --text-primary: #e2e8f0;
+            --text-secondary: #a0aec0;
+            --text-muted: #718096;
+            --border-color: #2d3748;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+            --info: #4299e1;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero .date {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .mood-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .pill {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            color: white;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .category-header h2 {
+            font-size: 2rem;
+            color: var(--text-primary);
+        }
+
+        .category-badge {
+            background: var(--accent-primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Items Grid */
+        .items-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .item-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .item-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            flex: 1;
+        }
+
+        .item-position {
+            background: var(--accent-primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .item-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .meta-tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .meta-tag.sentiment-positivo { background: rgba(72, 187, 120, 0.2); color: var(--success); }
+        .meta-tag.sentiment-negativo { background: rgba(245, 101, 101, 0.2); color: var(--danger); }
+        .meta-tag.sentiment-neutro { background: rgba(160, 174, 192, 0.2); color: var(--text-secondary); }
+        .meta-tag.sentiment-polarizzato { background: rgba(237, 137, 54, 0.2); color: var(--warning); }
+
+        .hashtags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hashtag {
+            background: rgba(102, 126, 234, 0.15);
+            color: var(--accent-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .item-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .item-sources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .source {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        /* Insight Section */
+        .insights-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .insights-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .insight-item {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--accent-primary);
+        }
+
+        .insight-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-primary);
+        }
+
+        .insight-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        footer .timestamp {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .date { font-size: 1rem; }
+            .container { padding: 1rem; }
+            .item-header { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Trend X Italia</h1>
+            <div class="date">12 January 2026</div>
+
+            
+            <div class="mood-pills">
+                
+                <div class="pill">😐 Clima neutro</div>
+                
+            </div>
+            
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="number">11</div>
+                <div class="label">Topic Totali</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">8</div>
+                <div class="label">Categorie</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">0.00</div>
+                <div class="label">Sentiment Medio</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">0</div>
+                <div class="label">Topic Polarizzati</div>
+            </div>
+        </div>
+
+        <!-- Category Sections -->
+        
+        <div class="category-section">
+            <div class="category-header">
+                <h2>Politica Estera</h2>
+                <div class="category-badge">3 topic</div>
+            </div>
+
+            <div class="items-grid">
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">La conferenza stampa di Meloni: bilanci e sfide per il 2026</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                        <span class="meta-tag" style="background: rgba(66, 153, 225, 0.2); color: var(--info);">
+                            POLITICA
+                        </span>
+                        
+                    </div>
+
+                    
+
+                    
+                    <div class="item-content">
+                        Il 9 gennaio la premier Giorgia Meloni ha tenuto la sua consueta conferenza stampa di inizio anno presso l&#39;Aula dei Gruppi parlamentari della Camera. Nel lungo intervento (risposte a 40 domande), la premier ha affrontato i principali dossier politici e internazionali, dalla politica estera all&#39;economia interna. Su Ucraina, Meloni ha ribadito che &#34;non ritiene necessario l&#39;invio di soldati italiani&#34; ma ha sottolineato che le &#34;garanzie di sicurezza&#34; passano per l&#39;articolo 5 della Nato. Ha inoltre lanciato un&#39;idea innovativa: &#34;È ora che l&#39;Ue parli con la Russia&#34; per affrontare la crisi. Sul Medio Oriente, ha confermato che i carabinieri saranno &#34;i primi a formare le forze di sicurezza palestinesi&#34; e che l&#39;Italia sarà &#34;la prima nazione Ue a contribuire alla sicurezza nella Striscia&#34;. Per quanto riguarda il referendum sulla giustizia, ha confermato come probabile la data del 22-23 marzo 2026, fornendo indicazioni sul tema chiave della campagna.
+                    </div>
+                    
+
+                    
+                    <div class="item-sources">
+                        <strong style="color: var(--text-muted); font-size: 0.8rem;">FONTI:</strong>
+                        
+                        <span class="source">Stampa</span>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">L&#39;accordo UE-Mercosur: via libera con garanzie italiane</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                        <span class="meta-tag" style="background: rgba(66, 153, 225, 0.2); color: var(--info);">
+                            POLITICA
+                        </span>
+                        
+                    </div>
+
+                    
+
+                    
+                    <div class="item-content">
+                        L&#39;8 gennaio gli ambasciatori dell&#39;Unione Europea hanno dato il via libera politico alla firma dell&#39;Accordo UE-Mercosur, anche con il voto positivo dell&#39;Italia. Si tratta del &#34;più grande accordo di libero scambio mai negoziato dall&#39;Ue&#34; che creerà un&#39;area di libero scambio di circa 800 milioni di persone. L&#39;Italia, forte della sua filiera agroalimentare sensibile, ha negoziato garanzie e clausole di salvaguardia rafforzate: ha ottenuto una riduzione della soglia di salvaguardia per i prezzi agricoli dal 5% (al ribasso da precedenti stime dell&#39;8%) e il rafforzamento dei controlli doganali per le merci in ingresso nell&#39;Ue. Il ministro dell&#39;Agricoltura Francesco Lollobrigida ha sottolineato che sono stati ottenuti &#34;meccanismi di protezione e reciprocità&#34; e un fondo di 6,3 miliardi di euro per mitigare potenziali perturbazioni di mercato. L&#39;accordo colpisce i dazi su almeno il 90% delle esportazioni europee verso i Paesi del Mercosur (Argentina, Brasile, Paraguay, Uruguay).
+                    </div>
+                    
+
+                    
+                    <div class="item-sources">
+                        <strong style="color: var(--text-muted); font-size: 0.8rem;">FONTI:</strong>
+                        
+                        <span class="source">Libero</span>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">Meloni</div>
+                        
+                        <div class="item-position">10</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                    </div>
+
+                    
+
+                    
+                    <div class="item-content">
+                        Conversazioni sulla postura del governo tra Iran, Venezuela, Groenlandia/NATO, Pirelli‑Sinochem e, indirettamente, anche sul caso Cloudflare.
+                    </div>
+                    
+
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <div class="category-header">
+                <h2>Politica Interna</h2>
+                <div class="category-badge">2 topic</div>
+            </div>
+
+            <div class="items-grid">
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">Liberazione di Trentini: successo diplomatico del governo</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                        <span class="meta-tag" style="background: rgba(66, 153, 225, 0.2); color: var(--info);">
+                            POLITICA
+                        </span>
+                        
+                    </div>
+
+                    
+
+                    
+                    <div class="item-content">
+                        La notizia che domina la scena politica italiana è la liberazione di Alberto Trentini e Mario Burlò dal carcere venezuelano, annunciata dal ministro degli Esteri Antonio Tajani nella mattina dell&#39;11 gennaio. Trentini, cooperante veneziano, era detenuto nel carcere di El Rodeo I a Caracas da 423 giorni senza accuse formali. Burlò, imprenditore torinese, era anch&#39;egli in prigionia. I due sono stati trasferiti nell&#39;ambasciata italiana a Caracas e un aereo è immediatamente partito da Roma per il rimpatrio. Il governo Meloni ha rivendicato il risultato come &#34;un forte segnale&#34; e &#34;un successo della diplomazia italiana&#34;, sottolineando in particolare i contatti e la costruttiva collaborazione con le autorità venezuelane, inclusa la presidente Nicolás Maduro. La famiglia di Trentini ha espresso gratitudine per l&#39;esito positivo dopo mesi di ansia.
+                    </div>
+                    
+
+                    
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">Decreto Ucraina: aiuti confermati con enfasi su aspetti civili</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                        <span class="meta-tag" style="background: rgba(66, 153, 225, 0.2); color: var(--info);">
+                            POLITICA
+                        </span>
+                        
+                    </div>
+
+                    
+
+                    
+                    <div class="item-content">
+                        Il 29 dicembre il Consiglio dei ministri ha approvato il decreto che prolunga gli aiuti all&#39;Ucraina fino al 31 dicembre 2026. Il provvedimento ha richiesto negoziati serrati tra Fratelli d&#39;Italia e Lega: quest&#39;ultima, guidata da Matteo Salvini, ha ottenuto l&#39;inserimento di una clausola che dà &#34;priorità&#34; agli aiuti &#34;logistici, sanitari, ad uso civile e di protezione dagli attacchi aerei, missilistici, con droni e cibernetici&#34;. Salvini non era presente al Consiglio dei ministri (per &#34;motivi personali&#34; secondo il Carroccio), ma fonti della Lega hanno espresso &#34;soddisfazione&#34; per il compromesso raggiunto. Il ministro della Difesa Guido Crosetto si presenterà alle Camere il 15 gennaio per le comunicazioni ufficiali sul decreto.
+                    </div>
+                    
+
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <div class="category-header">
+                <h2>Inchieste e Dossier</h2>
+                <div class="category-badge">1 topic</div>
+            </div>
+
+            <div class="items-grid">
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">Il caso Hannoun e le accuse di finanziamento a Hamas</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                        <span class="meta-tag" style="background: rgba(66, 153, 225, 0.2); color: var(--info);">
+                            POLITICA
+                        </span>
+                        
+                    </div>
+
+                    
+
+                    
+                    <div class="item-content">
+                        Nel campo della sicurezza interna, i riflettori restano puntati su Mohammad Hannoun, 63 anni, presidente dell&#39;Associazione Palestinesi d&#39;Italia, arrestato il 27 dicembre con altre 8 persone nell&#39;inchiesta &#34;Domino&#34;. Hannoun è accusato di essere il referente principale della cellula italiana di Hamas e di aver coordinato finanziamenti milionari (almeno 7 milioni secondo le indagini) destinati all&#39;organizzazione palestinese, sfruttando associazioni benefiche come copertura. L&#39;operazione della Polizia, coordinata dalla Direzione Distrettuale Antimafia e Antiterrorismo, ha portato al sequestro di 1 milione di euro e ha coinvolto perquisizioni in varie città italiane. Hannoun è stato interrogato il 30 dicembre davanti alla gip e si è avvalso della facoltà di non rispondere. Il caso ha sollevato anche polemiche parlamentari: il 14 gennaio il ministro dell&#39;Interno Matteo Piantedosi è atteso in aula per riferire sulla vicenda.
+                    </div>
+                    
+
+                    
+                    <div class="item-sources">
+                        <strong style="color: var(--text-muted); font-size: 0.8rem;">FONTI:</strong>
+                        
+                        <span class="source">DIRE</span>
+                        
+                        <span class="source">AGI</span>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <div class="category-header">
+                <h2>Economia e Finanza</h2>
+                <div class="category-badge">1 topic</div>
+            </div>
+
+            <div class="items-grid">
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">Il nodo Ilva: crisi produttiva e negoziati per la cessione</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                        <span class="meta-tag" style="background: rgba(66, 153, 225, 0.2); color: var(--info);">
+                            POLITICA
+                        </span>
+                        
+                    </div>
+
+                    
+
+                    
+                    <div class="item-content">
+                        L&#39;ex stabilimento siderurgico Ilva di Taranto rimane al centro delle attenzioni politiche e industriali. A partire dal 21 gennaio le batterie di forni a coke rimarranno ferme, una fermata che trasformerà l&#39;impianto da ciclo integrale a produttore che dovrà acquistare coke all&#39;estero, con ulteriori riduzioni di produzione previste. Il Consiglio dei ministri ha varato ulteriori fondi (fino a 50 milioni di euro) per garantire la prosecuzione dell&#39;attività fino al 30 gennaio 2026 e completare la cessione degli asset entro il primo quadrimestre 2026. I sindacati e il mondo industriale chiedono maggiore chiarezza su assetti societari, piano industriale e investimenti futuri. Ad oggi, rimane un solo soggetto interessato all&#39;acquisizione (contro gli iniziali 13), il che riduce significativamente i margini di trattativa.
+
+***
+                    </div>
+                    
+
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <div class="category-header">
+                <h2>Diritti Umani</h2>
+                <div class="category-badge">1 topic</div>
+            </div>
+
+            <div class="items-grid">
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">Iran / #DigitalBlackoutIran</div>
+                        
+                        <div class="item-position">1</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                    </div>
+
+                    
+                    <div class="hashtags">
+                        
+                        <span class="hashtag">#DigitalBlackoutIran</span>
+                        
+                        <span class="hashtag">#IranProtests</span>
+                        
+                        <span class="hashtag">#StandWithIran</span>
+                        
+                    </div>
+                    
+
+                    
+                    <div class="item-content">
+                        Proteste di massa, blackout quasi totale di Internet, appelli globali alla solidarietà.
+                    </div>
+                    
+
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <div class="category-header">
+                <h2>Cultura e Spettacolo</h2>
+                <div class="category-badge">1 topic</div>
+            </div>
+
+            <div class="items-grid">
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">Cloudflare</div>
+                        
+                        <div class="item-position">2</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                    </div>
+
+                    
+
+                    
+                    <div class="item-content">
+                        Scontro tra il colosso USA e l’AGCOM su Piracy Shield, maxi‑multa da 14,2 milioni e minaccia di ritiro dall’Italia.
+                    </div>
+                    
+
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <div class="category-header">
+                <h2>Società</h2>
+                <div class="category-badge">1 topic</div>
+            </div>
+
+            <div class="items-grid">
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">Juan Jesus</div>
+                        
+                        <div class="item-position">7</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                    </div>
+
+                    
+
+                    
+                    <div class="item-content">
+                        Il difensore del Napoli diventa nome a sé: fallo, “grazie” arbitrali secondo alcuni, giallo finale e squalifica col Parma.
+                    </div>
+                    
+
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <div class="category-header">
+                <h2>Lifestyle e Moda</h2>
+                <div class="category-badge">1 topic</div>
+            </div>
+
+            <div class="items-grid">
+                
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">LAST EPISODE OF H2H / #H2HseriesFinalEP</div>
+                        
+                        <div class="item-position">9</div>
+                        
+                    </div>
+
+                    <div class="item-meta">
+                        
+                        <span class="meta-tag sentiment-neutro">
+                            NEUTRO
+                        </span>
+                        
+
+                        
+                    </div>
+
+                    
+                    <div class="hashtags">
+                        
+                        <span class="hashtag">#H2HseriesFinalEP</span>
+                        
+                    </div>
+                    
+
+                    
+                    <div class="item-content">
+                        Finale della serie thai Head 2 Head, fandom BL globale attivissimo con campagne “trend booster”.
+                    </div>
+                    
+
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <!-- Insights Section -->
+        
+        <div class="insights-section">
+            <h2>📊 Insight Sociologici</h2>
+
+            
+            <div class="insight-item">
+                <h3>Focus su Politica Estera</h3>
+                <p>Con 3 topic, Politica Estera domina la conversazione odierna, rappresentando 27.3% del totale discusso.</p>
+            </div>
+            
+            <div class="insight-item">
+                <h3>Il tema più divisivo</h3>
+                <p>&#39;La conferenza stampa di Meloni: bilanci e sfide per il 2026&#39; emerge come il topic più polarizzante, catalizzando posizioni contrapposte e dibattito acceso.</p>
+            </div>
+            
+        </div>
+        
+
+        <!-- Footer -->
+        <footer>
+            <p>Analisi Social - Report automatizzato di trend e sentiment</p>
+            <div class="timestamp">
+                Report generato il 12/01/2026 alle 15:30
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
