@@ -123,3 +123,16 @@ scratch/
 
 # Development files (offline only)
 _dev/
+
+# Automazione locale (non pubblicare)
+scripts/
+config/
+logs/
+data/
+templates/
+
+# Mantieni solo i report
+!reports/
+!reports/**/*.html
+!index.html
+!README.md
