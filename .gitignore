@@ -70,8 +70,12 @@ data/cache/
 
 # Logs
 *.log
-logs/
 *.log.*
+logs/**/*.log
+logs/**/*.txt
+!logs/.gitkeep
+!logs/runs/.gitkeep
+!logs/errors/.gitkeep
 
 # Testing
 .pytest_cache/
