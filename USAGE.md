@@ -86,6 +86,7 @@ Il sistema esegue automaticamente:
 6. **Salvataggio** → Salva report in `reports/`
 7. **Archiviazione** → Sposta file processati in `data/processed/`
 8. **Logging** → Salva log JSON in `logs/runs/`
+9. **Pubblicazione online** → Aggiorna `index.html` e pubblica su GitHub (se abilitato)
 
 ---
 
@@ -133,6 +134,22 @@ Modifica le impostazioni generali:
 - `categorization.multi_category`: Permetti categorie secondarie (default: true)
 - `sentiment.neutral_threshold`: Soglia per sentiment neutro (default: 0.2)
 - `logging.level`: Livello di logging (DEBUG, INFO, WARNING, ERROR)
+- `git.auto_commit`: Abilita commit automatico (default: true)
+- `git.auto_push`: Abilita push automatico su GitHub (default: true)
+- `git.commit_prefix`: Emoji prefix per commit (default: "📊")
+
+**⚠️ Pubblicazione automatica su GitHub:**
+Se `git.auto_commit` e `git.auto_push` sono `true`, il sistema:
+1. Aggiorna automaticamente `index.html` con la card del nuovo report
+2. Fa commit e push su GitHub
+3. Il report diventa subito visibile online
+
+Per disabilitare la pubblicazione automatica, imposta:
+```yaml
+git:
+  auto_commit: false
+  auto_push: false
+```
 
 ### Categorie (`config/categories.json`)
 
