@@ -1,0 +1,41 @@
+# Analisi Social - Configurazione Generale
+
+paths:
+  raw_data: "data/raw"
+  daily_data: "data/daily"
+  reports: "reports"
+  archive: "reports/archive"
+  templates: "templates"
+  logs: "logs"
+
+report:
+  title_prefix: "Trend X Italia"
+  author: "Analisi Social"
+  language: "it"
+  timezone: "Europe/Rome"
+
+categorization:
+  min_keyword_match: 1          # Minimo keyword per assegnare categoria
+  fuzzy_threshold: 0.8          # Soglia similarità fuzzy matching (0-1)
+  default_category: "Società"   # Categoria fallback se nessun match
+  multi_category: true          # Permetti trend in più categorie
+
+sentiment:
+  min_words_for_analysis: 3     # Minimo parole per calcolare sentiment
+  neutral_threshold: 0.2        # Soglia per considerare neutro (-0.2 a +0.2)
+  use_emoji: true               # Considera emoji nel calcolo
+
+output:
+  html_minify: false            # Minifica HTML output
+  include_raw_data: false       # Includi dati grezzi nel report
+  archive_after_days: 7         # Sposta in archive dopo N giorni
+
+logging:
+  level: "INFO"                 # DEBUG, INFO, WARNING, ERROR
+  save_runs: true               # Salva log di ogni esecuzione
+  max_log_files: 30             # Mantieni ultimi N log
+
+git:
+  auto_commit: true
+  auto_push: true
+  commit_prefix: "📊"
